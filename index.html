@@ -2,1427 +2,1730 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tefin Services — Ghar Ka Khana, Every Day</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<title>TiffinDesk | Business Dashboard</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --saffron:#E8631A;--saffron-l:#F47D35;--saffron-d:#B84E12;
-  --gold:#F5A623;--gold-l:#FAC65A;
-  --mint:#1DB954;--mint-d:#158F3E;
-  --cream:#FDF6E3;--cream-d:#F5EDD4;
-  --deep:#180C00;--deep2:#2C1A0A;
-  --clay:#7A3B10;--steel:#2C3E50;
-  --muted:#6B7280;--border:#E8DCC8;
-  --shadow:0 4px 24px rgba(232,99,26,.10);
-  --shadow-lg:0 12px 48px rgba(232,99,26,.18);
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  background: #f1f4f9;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  color: #1a2c3e;
+  min-height: 100vh;
+  font-size: 14px;
 }
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--deep);overflow-x:hidden}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--cream)}
-::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:3px}
 
-/* ── COUNTDOWN ── */
-#cd-bar{background:var(--deep);color:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;font-size:13px;z-index:200;position:relative}
-.cd-tag{background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);color:var(--gold-l);font-weight:700;font-size:11px;letter-spacing:1px;padding:4px 14px;border-radius:20px;text-transform:uppercase}
-.cd-lbl{opacity:.7;font-weight:500}
-.cd-times{display:flex;gap:8px}
-.cd-b{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:6px 12px;text-align:center;min-width:52px}
-.cd-n{display:block;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1}
-.cd-u{display:block;font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:.55;margin-top:2px}
-
-/* ── NAV ── */
-nav{position:sticky;top:0;z-index:500;background:rgba(253,246,227,.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:66px}
-.logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--saffron);text-decoration:none;letter-spacing:-.5px;display:flex;align-items:center;gap:6px}
-.logo-dot{width:7px;height:7px;background:var(--gold);border-radius:50%}
-nav ul{display:flex;align-items:center;gap:28px;list-style:none}
-nav ul a{text-decoration:none;color:var(--deep2);font-size:14px;font-weight:500;transition:color .2s;position:relative;padding-bottom:2px}
-nav ul a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--saffron);transform:scaleX(0);transition:transform .25s;border-radius:2px}
-nav ul a:hover{color:var(--saffron)}
-nav ul a:hover::after{transform:scaleX(1)}
-.nav-r{display:flex;align-items:center;gap:12px}
-.cart-btn{position:relative;background:var(--cream-d);border:1.5px solid var(--border);border-radius:12px;padding:8px 18px;cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;color:var(--deep);transition:all .2s;font-family:'DM Sans',sans-serif}
-.cart-btn:hover{border-color:var(--saffron);background:#fff}
-.cart-badge{background:var(--saffron);color:#fff;font-size:11px;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:absolute;top:-8px;right:-8px;transition:transform .25s;display:none}
-.cart-badge.bump{transform:scale(1.45)}
-.btn-cta{background:var(--saffron);color:#fff;padding:9px 22px;border-radius:24px;font-weight:700;font-size:14px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .25s}
-.btn-cta:hover{background:var(--saffron-d);transform:translateY(-1px)}
-
-/* ── HERO ── */
-#hero{min-height:91vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:48px;padding:56px 80px 72px;position:relative;overflow:hidden}
-.hero-decor{position:absolute;inset:0;pointer-events:none;z-index:0}
-.hc1{position:absolute;top:-100px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(245,166,35,.1) 0%,transparent 70%)}
-.hc2{position:absolute;bottom:-120px;left:-80px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(232,99,26,.07) 0%,transparent 70%)}
-.sp{position:absolute;font-size:20px;opacity:.1;animation:sfloat 8s ease-in-out infinite}
-@keyframes sfloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-16px) rotate(18deg)}}
-
-.hero-l{position:relative;z-index:2}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(232,99,26,.09);border:1px solid rgba(232,99,26,.2);color:var(--saffron);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 16px;border-radius:24px;margin-bottom:22px}
-.pdot{width:7px;height:7px;background:var(--mint);border-radius:50%;animation:pulseA 2s infinite}
-@keyframes pulseA{0%,100%{box-shadow:0 0 0 0 rgba(29,185,84,.5)}50%{box-shadow:0 0 0 6px rgba(29,185,84,0)}}
-h1.hh{font-family:'Playfair Display',serif;font-size:clamp(42px,5.2vw,74px);font-weight:900;line-height:.93;margin-bottom:20px;letter-spacing:-2px}
-h1.hh .l1{display:block;color:var(--deep)}
-h1.hh .l2{display:block;color:var(--saffron);font-style:italic}
-h1.hh .l3{display:block;font-size:.52em;font-style:normal;font-weight:700;color:var(--clay);letter-spacing:-1px;margin-top:6px}
-.hero-desc{font-size:16px;color:var(--muted);line-height:1.72;max-width:430px;margin-bottom:30px}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
-.btn-p{background:var(--saffron);color:#fff;padding:13px 28px;border-radius:32px;font-weight:700;font-size:15px;text-decoration:none;border:none;cursor:pointer;transition:all .28s;display:inline-flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif}
-.btn-p:hover{background:var(--saffron-d);transform:translateY(-2px);box-shadow:0 8px 22px rgba(232,99,26,.32)}
-.btn-o{background:transparent;color:var(--saffron);padding:13px 28px;border-radius:32px;font-weight:700;font-size:15px;text-decoration:none;border:2px solid var(--saffron);cursor:pointer;transition:all .28s;display:inline-flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif}
-.btn-o:hover{background:var(--saffron);color:#fff;transform:translateY(-2px)}
-.trust-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.tr-item{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--muted);font-weight:500}
-.tr-sep{width:4px;height:4px;background:var(--border);border-radius:50%}
-
-/* TIFFIN ANIMATION */
-.hero-r{position:relative;z-index:2;display:flex;align-items:center;justify-content:center}
-.tiffin-wrap{position:relative;width:370px;height:410px;cursor:pointer;filter:drop-shadow(0 18px 36px rgba(232,99,26,.2))}
-.tiffin-wrap svg{overflow:visible}
-.tap-hint{position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);white-space:nowrap;background:var(--deep);color:#fff;font-size:12px;font-weight:600;padding:7px 18px;border-radius:20px;display:flex;align-items:center;gap:6px;box-shadow:0 4px 16px rgba(0,0,0,.2)}
-.tap-hint::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);border:6px solid transparent;border-bottom-color:var(--deep);border-top:none}
-.fb{position:absolute;background:#fff;border:2px solid var(--saffron);border-radius:14px;padding:7px 13px;font-size:12px;font-weight:700;color:var(--saffron);box-shadow:0 4px 14px rgba(232,99,26,.18);animation:fbf 4s ease-in-out infinite}
-@keyframes fbf{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.fb1{top:14px;left:-14px;animation-delay:0s}
-.fb2{top:30px;right:-16px;animation-delay:1.6s}
-.fb3{top:-25px;right:55px;animation-delay:3s}
-
-/* ── STATS ── */
-.stats{background:var(--deep);padding:20px 80px;display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:16px}
-.st-item{text-align:center}
-.st-n{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--gold);display:block;line-height:1}
-.st-l{font-size:12px;color:rgba(255,255,255,.55);font-weight:500;display:block;margin-top:3px;letter-spacing:.5px}
-.st-sep{width:1px;background:rgba(255,255,255,.1);height:36px}
-
-/* ── PICKUP BANNER ── */
-.pickup{background:var(--deep2);padding:24px 80px;display:flex;align-items:flex-start;gap:28px;flex-wrap:wrap}
-.pickup-ico{font-size:44px;flex-shrink:0;margin-top:4px}
-.pickup-body h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold);margin-bottom:6px}
-.pickup-body p{font-size:14px;color:rgba(255,255,255,.7);line-height:1.65;max-width:680px}
-.pickup-chips{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-.pc{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.8);display:inline-flex;align-items:center;gap:5px}
-
-/* ── SECTION BASE ── */
-.sec{padding:80px 80px}
-.sec.bg-w{background:#fff}
-.inner{max-width:1160px;margin:0 auto}
-.sec-tag{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--saffron);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.sec-tag::before{content:'';width:22px;height:2px;background:var(--saffron);display:inline-block;border-radius:2px}
-.sec-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3.2vw,44px);font-weight:900;color:var(--deep);line-height:1.05;letter-spacing:-1px;margin-bottom:10px}
-.sec-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:500px}
-
-/* ── PLANS ── */
-.plans-head{text-align:center;margin-bottom:44px}
-.plans-head .sec-tag{justify-content:center}
-.plans-head .sec-tag::before{display:none}
-.plans-head .sec-sub{margin:0 auto}
-.tab-wrap{display:flex;justify-content:center;margin-bottom:44px}
-.tabs{display:inline-flex;background:var(--cream);border:1.5px solid var(--border);border-radius:18px;padding:5px;gap:4px}
-.tab{padding:9px 20px;border-radius:14px;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .25s;color:var(--muted);display:flex;align-items:center;gap:6px}
-.tab.active{background:var(--saffron);color:#fff;box-shadow:0 4px 12px rgba(232,99,26,.28)}
-.tab:not(.active):hover{background:var(--cream-d);color:var(--deep)}
-
-.pnl{display:none;grid-template-columns:1fr 1fr;gap:44px;align-items:start;animation:pIn .35s ease}
-.pnl.active{display:grid}
-@keyframes pIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-/* PLAN CARD */
-.plan-card{background:var(--cream);border:2px solid var(--border);border-radius:24px;padding:30px;position:relative;overflow:hidden;transition:all .3s}
-.plan-card:hover{border-color:var(--saffron);box-shadow:var(--shadow-lg)}
-.pa{position:absolute;top:0;left:0;right:0;height:5px;background:var(--saffron);border-radius:24px 24px 0 0}
-.pa.g{background:var(--mint)}
-.pa.c{background:var(--clay)}
-.badge-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
-.bdg{display:inline-flex;align-items:center;gap:4px;padding:3px 11px;border-radius:18px;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
-.bdg-hot{background:rgba(232,99,26,.1);color:var(--saffron);border:1px solid rgba(232,99,26,.18)}
-.bdg-new{background:rgba(29,185,84,.1);color:var(--mint-d);border:1px solid rgba(29,185,84,.18)}
-.bdg-pro{background:rgba(44,62,80,.08);color:var(--steel);border:1px solid rgba(44,62,80,.15)}
-.bdg-stu{background:rgba(122,59,16,.1);color:var(--clay);border:1px solid rgba(122,59,16,.15)}
-.plan-name{font-family:'Playfair Display',serif;font-size:27px;font-weight:900;margin-bottom:4px;color:var(--deep)}
-.plan-tag{font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.5}
-
-/* PRICE BLOCK */
-.price-block{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:18px 20px;margin-bottom:20px}
-.price-main{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
-.price-big{font-family:'Playfair Display',serif;font-size:44px;font-weight:900;color:var(--saffron);line-height:1}
-.price-per{font-size:14px;color:var(--muted)}
-.price-btm{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.price-opt{font-size:13px;color:var(--muted);background:var(--cream);border:1px solid var(--border);border-radius:20px;padding:3px 12px;font-weight:500}
-.price-opt.active{background:rgba(232,99,26,.08);color:var(--saffron);border-color:rgba(232,99,26,.2);font-weight:700}
-.price-save{font-size:12px;font-weight:700;color:var(--mint-d);background:rgba(29,185,84,.08);border-radius:12px;padding:3px 10px}
-
-.meal-list{list-style:none;margin-bottom:22px}
-.ml-i{display:flex;align-items:center;gap:11px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:14px;color:#444}
-.ml-i:last-child{border-bottom:none}
-.ml-ico{width:30px;height:30px;border-radius:9px;background:rgba(232,99,26,.1);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.ml-ico.g{background:rgba(29,185,84,.1)}
-.ml-ico.b{background:rgba(44,130,201,.1)}
-.add-btn{width:100%;padding:13px;background:var(--saffron);color:#fff;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:9px}
-.add-btn:hover{background:var(--saffron-d);transform:translateY(-1px);box-shadow:0 6px 18px rgba(232,99,26,.28)}
-.add-btn.g{background:var(--mint)}
-.add-btn.g:hover{background:var(--mint-d)}
-
-/* PLAN VISUAL */
-.plan-vis{border-radius:24px;overflow:hidden;border:2px solid var(--border);background:var(--cream);display:flex;flex-direction:column;align-items:center;padding:28px;position:sticky;top:76px}
-.vis-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--deep);margin-bottom:18px}
-.meal-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin-bottom:18px}
-.mc{background:#fff;border:1px solid var(--border);border-radius:9px;padding:8px 11px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500}
-.mc-ico{font-size:15px}
-.nut-box{background:rgba(232,99,26,.04);border:1px solid rgba(232,99,26,.1);border-radius:13px;padding:14px 16px;width:100%}
-.nut-lbl{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--saffron);margin-bottom:10px}
-.nut-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:13px}
-.nut-row:last-child{border-bottom:none}
-.nk{color:var(--muted)}
-.nv{font-weight:700;color:var(--deep)}
-.green-note{margin-top:14px;width:100%;background:rgba(29,185,84,.07);border:1px solid rgba(29,185,84,.18);border-radius:11px;padding:11px 13px;font-size:12px;color:#155724;line-height:1.55}
-
-/* ── JUICE SECTION ── */
-#juice-sec{background:#fff}
-.bottle-policy{background:rgba(29,185,84,.06);border:1.5px solid rgba(29,185,84,.22);border-radius:14px;padding:14px 20px;display:flex;align-items:flex-start;gap:12px;margin-bottom:36px}
-.bp-ico{font-size:26px;flex-shrink:0;margin-top:2px}
-.bp-txt{font-size:13px;color:var(--deep2);line-height:1.65}
-.bp-txt strong{color:var(--mint-d);font-weight:700}
-.bp-txt .warn{color:#92400E;font-weight:600}
-
-.juice-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:44px;align-items:start}
-.juice-plans{display:flex;flex-direction:column;gap:14px}
-.jp-card{background:var(--cream);border:2px solid var(--border);border-radius:17px;padding:20px 22px;cursor:pointer;transition:all .28s;position:relative}
-.jp-card:hover{border-color:var(--saffron);box-shadow:var(--shadow)}
-.jp-card.sel{border-color:var(--saffron);background:rgba(232,99,26,.03)}
-.jp-card.sel::after{content:'✓';position:absolute;top:14px;right:14px;width:24px;height:24px;background:var(--saffron);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
-.jp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
-.jp-nm{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--deep)}
-.jp-pr{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--saffron)}
-.jp-desc{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:10px}
-.jp-chips{display:flex;gap:6px;flex-wrap:wrap}
-.jpc{background:#fff;border:1px solid var(--border);border-radius:18px;padding:3px 10px;font-size:11px;font-weight:600;color:var(--clay)}
-
-/* FLAVOUR PICKER */
-.fl-panel{background:#fff;border:2px solid var(--border);border-radius:22px;padding:26px;position:sticky;top:76px}
-.fl-title{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;margin-bottom:5px;color:var(--deep)}
-.fl-sub{font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.5}
-.fl-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
-.fl-item{border:2px solid var(--border);border-radius:13px;padding:13px 10px;cursor:pointer;transition:all .25s;text-align:center;position:relative}
-.fl-item:hover{border-color:var(--saffron);transform:translateY(-2px)}
-.fl-item.sel{border-color:var(--saffron);background:rgba(232,99,26,.04)}
-.fl-item.sel::after{content:'✓';position:absolute;top:6px;right:8px;font-size:11px;font-weight:700;color:var(--saffron)}
-.fl-emoji{font-size:26px;margin-bottom:5px;display:block}
-.fl-name{font-size:13px;font-weight:600;color:var(--deep);margin-bottom:2px}
-.fl-note{font-size:11px;color:var(--muted)}
-.juice-sum{background:var(--cream);border-radius:11px;padding:13px 15px;font-size:13px;color:var(--deep2);margin-bottom:14px;line-height:1.6;display:none}
-.add-juice-btn{width:100%;padding:13px;background:linear-gradient(135deg,#F5A623,#E8631A);color:#fff;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:all .3s}
-.add-juice-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(232,99,26,.3)}
-.bottle-note{text-align:center;font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6}
-
-/* ── ADD-ONS ── */
-.ao-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;margin-top:32px}
-.ao-card{background:#fff;border:1.5px solid var(--border);border-radius:17px;padding:22px 18px;text-align:center;cursor:pointer;transition:all .3s;position:relative}
-.ao-card:hover{border-color:var(--saffron);transform:translateY(-3px);box-shadow:var(--shadow)}
-.ao-card.added{border-color:var(--mint)}
-.ao-card.added::after{content:'✓ Added';position:absolute;bottom:0;left:0;right:0;background:var(--mint);color:#fff;font-size:11px;font-weight:700;padding:5px;border-radius:0 0 15px 15px;letter-spacing:.5px}
-.ao-ico{width:56px;height:56px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:26px;border:2px solid var(--border)}
-.ao-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:4px}
-.ao-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:10px}
-.ao-price{font-size:15px;font-weight:700;color:var(--saffron);margin-bottom:10px}
-.ao-add{width:100%;padding:8px;background:var(--saffron);color:#fff;border:none;border-radius:9px;font-weight:700;font-size:13px;cursor:pointer;transition:all .25s;font-family:'DM Sans',sans-serif}
-.ao-add:hover{background:var(--saffron-d)}
-
-/* ── SWEETS ── */
-.sw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-top:32px}
-.sw-card{background:var(--cream);border:1.5px solid var(--border);border-radius:15px;padding:18px 14px;text-align:center;transition:all .25s;cursor:pointer}
-.sw-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 6px 22px rgba(245,166,35,.15)}
-.sw-em{font-size:34px;display:block;margin-bottom:9px}
-.sw-nm{font-weight:700;font-size:14px;margin-bottom:4px}
-.sw-pr{font-size:14px;font-weight:700;color:var(--saffron);margin-bottom:3px}
-.sw-mn{font-size:11px;color:var(--muted);margin-bottom:10px}
-.sw-btn{padding:6px 14px;background:var(--gold);color:#fff;border:none;border-radius:18px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
-.sw-btn:hover{background:#D4910F}
-
-/* ── KITCHEN ── */
-.kc-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px}
-.kc{border-radius:22px;padding:30px;position:relative;overflow:hidden;transition:transform .3s}
-.kc:hover{transform:translateY(-3px)}
-.kc-dk{background:var(--deep);color:#fff}
-.kc-sf{background:var(--saffron);color:#fff}
-.kc-cl{background:var(--clay);color:#fff}
-.kc-cr{background:var(--cream-d);border:2px solid var(--border)}
-.kc-glow{position:absolute;top:-30px;right:-30px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.04)}
-.kc-ico{font-size:38px;margin-bottom:16px;display:block}
-.kc-nm{font-family:'Playfair Display',serif;font-size:21px;font-weight:800;margin-bottom:7px}
-.kc-dk .kc-nm,.kc-sf .kc-nm,.kc-cl .kc-nm{color:#fff}
-.kc-cr .kc-nm{color:var(--deep)}
-.kc-desc{font-size:13px;line-height:1.65;opacity:.78;margin-bottom:14px}
-.kc-ul{list-style:none}
-.kc-ul li{font-size:13px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:8px;opacity:.8}
-.kc-cr .kc-ul li{border-bottom-color:var(--border);color:var(--deep2);opacity:1}
-.kc-ul li::before{content:'→';opacity:.65;font-weight:700}
-
-/* ── TESTIMONIALS ── */
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
-.testi{background:#fff;border:1.5px solid var(--border);border-radius:17px;padding:24px;transition:all .3s}
-.testi:hover{border-color:var(--saffron);box-shadow:var(--shadow)}
-.t-av{width:38px;height:38px;border-radius:50%;background:var(--saffron);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;margin-bottom:11px}
-.t-stars{color:var(--gold);font-size:14px;margin-bottom:10px;letter-spacing:1px}
-.t-txt{font-size:14px;color:#444;line-height:1.7;font-style:italic;margin-bottom:14px}
-.t-name{font-weight:700;font-size:14px;color:var(--deep)}
-.t-role{font-size:12px;color:var(--muted);margin-top:2px}
-
-/* ── CTA ── */
-.cta-wrap{background:var(--deep);border-radius:28px;margin:0 80px 72px;padding:60px 72px;text-align:center;position:relative;overflow:hidden}
-.cta-c1{position:absolute;top:-50px;left:-50px;width:220px;height:220px;border-radius:50%;background:rgba(245,166,35,.06)}
-.cta-c2{position:absolute;bottom:-60px;right:-50px;width:260px;height:260px;border-radius:50%;background:rgba(232,99,26,.07)}
-.cta-wrap .sec-tag{justify-content:center;color:var(--gold-l)}
-.cta-wrap .sec-tag::before{background:var(--gold-l)}
-.cta-h{font-family:'Playfair Display',serif;font-size:clamp(30px,3.8vw,50px);font-weight:900;color:#fff;margin-bottom:12px;letter-spacing:-1px;position:relative}
-.cta-sub{font-size:16px;color:rgba(255,255,255,.58);max-width:440px;margin:0 auto 32px;line-height:1.72;position:relative}
-.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
-.btn-w{background:#fff;color:var(--saffron);padding:14px 30px;border-radius:30px;font-weight:700;font-size:15px;text-decoration:none;border:none;cursor:pointer;transition:all .28s;display:inline-flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif}
-.btn-w:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.15)}
-.btn-gh{background:transparent;color:rgba(255,255,255,.82);padding:14px 30px;border-radius:30px;font-weight:600;font-size:15px;text-decoration:none;border:2px solid rgba(255,255,255,.22);cursor:pointer;transition:all .28s;display:inline-flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif}
-.btn-gh:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.45)}
-
-/* ── FOOTER ── */
-footer{background:var(--deep2);padding:60px 80px 28px}
-.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;max-width:1160px;margin:0 auto 44px}
-.ft-brand{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--saffron);margin-bottom:10px}
-.ft-desc{font-size:13px;color:rgba(255,255,255,.45);line-height:1.75;max-width:240px}
-.ft-links{margin-top:18px;display:flex;flex-direction:column;gap:8px}
-.ft-links a{font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:7px;transition:color .2s}
-.ft-links a:hover{color:var(--gold)}
-.ft-col h4{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
-.ft-col ul li{font-size:13px;color:rgba(255,255,255,.45);cursor:pointer;transition:color .2s}
-.ft-col ul li:hover{color:#fff}
-.ft-btm{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;display:flex;align-items:center;justify-content:space-between;max-width:1160px;margin:0 auto;font-size:12px;color:rgba(255,255,255,.3)}
-.ft-bgs{display:flex;gap:10px}
-.ft-bg{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:3px 11px;font-size:11px;font-weight:600;color:rgba(255,255,255,.4)}
-
-/* ── CART DRAWER ── */
-.c-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:800;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(3px)}
-.c-overlay.open{opacity:1;pointer-events:all}
-.c-drawer{position:fixed;right:0;top:0;bottom:0;width:410px;background:#fff;z-index:900;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.34,1.18,0.64,1);box-shadow:-6px 0 44px rgba(0,0,0,.14)}
-.c-drawer.open{transform:translateX(0)}
-.c-hdr{padding:22px 22px 18px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--cream)}
-.c-hdr-l{display:flex;align-items:center;gap:11px}
-.c-hdr-ico{font-size:26px}
-.c-hdr-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--deep)}
-.c-hdr-sub{font-size:12px;color:var(--muted);margin-top:2px}
-.c-close{width:34px;height:34px;background:var(--cream-d);border:1.5px solid var(--border);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s}
-.c-close:hover{background:var(--saffron);color:#fff;border-color:var(--saffron)}
-.c-body{flex:1;overflow-y:auto;padding:18px 20px}
-.c-empty{text-align:center;padding:56px 18px}
-.c-empty-ico{font-size:52px;display:block;margin-bottom:14px;opacity:.45}
-.c-empty-t{font-size:15px;font-weight:600;color:var(--muted);margin-bottom:5px}
-.c-empty-s{font-size:13px;color:var(--muted);opacity:.65}
-.c-item{background:var(--cream);border:1.5px solid var(--border);border-radius:15px;padding:14px;margin-bottom:11px;transition:all .25s}
-.c-item:hover{border-color:var(--saffron)}
-.ci-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-.ci-left{display:flex;align-items:flex-start;gap:9px;flex:1}
-.ci-ico{font-size:24px;flex-shrink:0}
-.ci-nm{font-weight:700;font-size:14px;color:var(--deep);line-height:1.3}
-.ci-dt{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.45}
-.ci-pr{font-family:'Playfair Display',serif;font-size:17px;font-weight:900;color:var(--saffron);white-space:nowrap}
-.ci-btm{display:flex;align-items:center;justify-content:space-between;margin-top:11px}
-.qty{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--border);border-radius:11px;padding:3px 7px}
-.q-btn{width:26px;height:26px;background:none;border:none;cursor:pointer;font-size:17px;font-weight:700;color:var(--saffron);border-radius:7px;transition:background .2s;display:flex;align-items:center;justify-content:center}
-.q-btn:hover{background:rgba(232,99,26,.1)}
-.q-val{font-weight:700;font-size:14px;min-width:18px;text-align:center}
-.ci-rem{background:none;border:none;cursor:pointer;color:var(--muted);font-size:15px;transition:color .2s;padding:3px}
-.ci-rem:hover{color:#e74c3c}
-.ci-sub{font-size:12px;color:var(--muted)}
-
-.c-ftr{padding:18px 20px;border-top:1.5px solid var(--border);background:var(--cream)}
-.cf-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;padding:4px 0}
-.cf-lbl{color:var(--muted)}
-.cf-val{font-weight:700;color:var(--deep)}
-.cf-val.g{color:var(--mint-d)}
-.cf-total{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--deep);border-top:2px solid var(--border);margin-top:8px;padding-top:11px;display:flex;justify-content:space-between}
-.cf-disc{color:var(--mint-d);font-size:13px;font-weight:500}
-.chk-btn{width:100%;padding:14px;background:var(--saffron);color:#fff;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:9px;margin-top:14px}
-.chk-btn:hover{background:var(--saffron-d);transform:translateY(-1px);box-shadow:0 6px 18px rgba(232,99,26,.28)}
-.cf-note{text-align:center;font-size:11px;color:var(--muted);margin-top:9px;line-height:1.55}
-
-/* ── TOAST ── */
-.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--deep);color:#fff;padding:13px 22px;border-radius:50px;font-size:14px;font-weight:600;z-index:2000;transition:transform .3s cubic-bezier(0.34,1.4,0.64,1);display:flex;align-items:center;gap:9px;white-space:nowrap;box-shadow:0 8px 30px rgba(0,0,0,.22)}
-.toast.show{transform:translateX(-50%) translateY(0)}
-
-/* ── SCROLL REVEAL ── */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
-.rl{opacity:0;transform:translateX(-24px);transition:opacity .55s ease,transform .55s ease}
-.rr{opacity:0;transform:translateX(24px);transition:opacity .55s ease,transform .55s ease}
-.rv.vis,.rl.vis,.rr.vis{opacity:1;transform:translate(0)}
-
-/* ── RESPONSIVE ── */
-@media(max-width:1024px){
-  #hero{grid-template-columns:1fr;padding:48px 40px 60px;text-align:center}
-  .hero-r{display:none}
-  .hero-btns,.trust-row{justify-content:center}
-  .pnl.active,.juice-grid,.kc-grid{grid-template-columns:1fr}
-  .testi-grid{grid-template-columns:1fr}
-  .sec{padding:64px 40px}
-  .stats{padding:20px 40px}
-  .pickup{padding:20px 40px}
-  .cta-wrap{margin:0 40px 60px;padding:44px 40px}
-  footer{padding:52px 40px 24px}
-  nav{padding:0 24px}
-  .tabs{flex-wrap:wrap}
-  .ft-grid{grid-template-columns:1fr 1fr}
+/* ── TOP NAV ─────────────────────────────── */
+.top-nav {
+  background: white;
+  border-bottom: 1px solid #eef2f8;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
-@media(max-width:640px){
-  nav ul{display:none}
-  .sec{padding:52px 20px}
-  .stats{padding:18px 20px}
-  .pickup{padding:18px 20px}
-  .cta-wrap{margin:0 16px 52px;padding:36px 24px}
-  footer{padding:44px 20px 20px}
-  .ao-grid{grid-template-columns:1fr 1fr}
-  .fl-grid{grid-template-columns:1fr 1fr}
-  .ft-grid{grid-template-columns:1fr}
-  .c-drawer{width:100%}
-  .meal-chips{grid-template-columns:1fr}
+
+.top-nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 52px;
+}
+
+.brand {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e4a6e;
+  margin-right: 24px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  flex: 1;
+  scrollbar-width: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+
+.nav-btn {
+  padding: 0 14px;
+  height: 52px;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #5b6e8c;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: 0.15s;
+}
+.nav-btn:hover { color: #1e4a6e; }
+.nav-btn.active { color: #2c7a5e; border-bottom-color: #2c7a5e; }
+
+/* ── PAGE CONTAINER ──────────────────────── */
+.page { display: none; padding: 16px; }
+.page.active { display: block; }
+
+.container { max-width: 1400px; margin: 0 auto; }
+
+/* ── HEADER CARD ─────────────────────────── */
+.header-card {
+  background: white;
+  border-radius: 20px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.header-card h1 { font-size: 1.3rem; font-weight: 700; color: #1e4a6e; margin-bottom: 3px; }
+.header-card p { font-size: 0.75rem; color: #5b6e8c; }
+.header-card-bottom {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #eef2f8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.date-pill {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2c7a5e;
+  background: #e8f3ef;
+  padding: 7px 20px;
+  border-radius: 40px;
+}
+.btn-primary {
+  background: #2c7a5e;
+  color: white;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 40px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+.btn-primary:hover { background: #1e5c46; }
+.btn-primary:active { transform: scale(0.97); }
+
+/* ── STATS ROW ───────────────────────────── */
+.stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 12px 16px;
+  flex: 1;
+  min-width: 80px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.stat-card .s-label { font-size: 0.65rem; color: #5b6e8c; letter-spacing: 0.3px; margin-bottom: 3px; }
+.stat-card .s-value { font-size: 1.5rem; font-weight: 700; color: #1e4a6e; }
+.stat-card .s-sub { font-size: 0.62rem; color: #8ba0bc; margin-top: 2px; }
+.s-value.green { color: #2c7a5e; }
+.s-value.red { color: #b45309; }
+.s-value.blue { color: #1e4a6e; }
+
+/* ── FILTER BAR ──────────────────────────── */
+.filter-bar {
+  background: white;
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.search-wrap { flex: 2; min-width: 150px; }
+.search-wrap input {
+  width: 100%;
+  padding: 9px 14px;
+  border-radius: 40px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.82rem;
+  font-family: inherit;
+  outline: none;
+  background: #fafcff;
+}
+.search-wrap input:focus { border-color: #2c7a5e; background: white; }
+.f-select {
+  padding: 9px 14px;
+  border-radius: 40px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  font-size: 0.82rem;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+}
+.f-select:focus { border-color: #2c7a5e; }
+.toggle-btn {
+  background: #eef2f7;
+  border: 1px solid #e2e8f0;
+  padding: 9px 16px;
+  border-radius: 40px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #2c5a7a;
+  font-family: inherit;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+.toggle-btn.active { background: #2c7a5e; color: white; border-color: #2c7a5e; }
+
+/* ── TABLE ───────────────────────────────── */
+.table-wrapper {
+  background: white;
+  border-radius: 20px;
+  overflow-x: auto;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  margin-bottom: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; min-width: 600px; }
+th {
+  text-align: left;
+  padding: 13px 12px;
+  background: #fafcff;
+  color: #2c4c6c;
+  font-weight: 700;
+  border-bottom: 2px solid #eef2f8;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+td { padding: 11px 12px; border-bottom: 1px solid #f0f4fa; vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: #fafcff; }
+
+.id-badge {
+  font-family: monospace;
+  background: #eef2fa;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #2c6280;
+  display: inline-block;
+  white-space: nowrap;
+}
+.plan-tag {
+  background: #eaf3fc;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  display: inline-block;
+  white-space: nowrap;
+}
+.badge {
+  display: inline-block;
+  padding: 4px 11px;
+  border-radius: 30px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.badge-active   { background: #e0f2e6; color: #1a6e46; }
+.badge-paused   { background: #ffe2db; color: #bc4a2c; }
+.badge-paid     { background: #d1fae5; color: #065f46; }
+.badge-pending  { background: #fef3c7; color: #b45309; }
+.badge-sent     { background: #d1fae5; color: #065f46; }
+.badge-delivered{ background: #a7f3d0; color: #064e3b; }
+.badge-expense  { background: #fef3c7; color: #b45309; }
+.badge-income   { background: #d1fae5; color: #065f46; }
+
+.action-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.btn-sm {
+  border: none;
+  padding: 5px 12px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.68rem;
+  cursor: pointer;
+  transition: 0.12s;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.btn-sm:active { transform: scale(0.95); }
+.btn-edit   { background: #eef2ff; color: #2c6280; }
+.btn-del    { background: #feece8; color: #c2412c; }
+.btn-green  { background: #2c7a5e; color: white; }
+.btn-green:hover { background: #1e5c46; }
+.btn-gray   { background: #9aaebf; color: white; }
+.btn-yellow { background: #fef3c7; color: #b45309; }
+.btn-teal   { background: #d1fae5; color: #065f46; }
+.btn-dgreen { background: #a7f3d0; color: #064e3b; }
+
+/* ── CARD ────────────────────────────────── */
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  margin-bottom: 16px;
+}
+.card-title { font-size: 0.95rem; font-weight: 700; color: #1e4a6e; margin-bottom: 14px; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.card-header .card-title { margin-bottom: 0; }
+
+/* ── GRID ────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+
+/* ── CAT CARD ────────────────────────────── */
+.cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+.cat-card {
+  background: #fafcff;
+  border: 1px solid #eef2f8;
+  border-radius: 14px;
+  padding: 14px;
+  cursor: pointer;
+  transition: 0.18s;
+}
+.cat-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.08); background: white; }
+.cat-name  { font-size: 0.72rem; font-weight: 700; color: #5b6e8c; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.3px; }
+.cat-amt   { font-size: 1.25rem; font-weight: 700; margin-bottom: 2px; }
+.cat-count { font-size: 0.65rem; color: #8ba0bc; margin-bottom: 7px; }
+.prog-meta { display: flex; justify-content: space-between; font-size: 0.62rem; color: #8ba0bc; margin-bottom: 3px; font-weight: 600; }
+.prog-bar  { height: 5px; background: #eef2f8; border-radius: 99px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 99px; transition: width 0.4s ease; }
+
+/* ── BUDGET ──────────────────────────────── */
+.budget-item {
+  background: #fafcff;
+  border: 1px solid #eef2f8;
+  border-radius: 14px;
+  padding: 13px 15px;
+  margin-bottom: 9px;
+}
+.budget-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 9px; }
+.budget-name  { font-size: 0.85rem; font-weight: 700; }
+.budget-spent { font-size: 0.68rem; color: #8ba0bc; margin-top: 2px; }
+.budget-limit { font-size: 0.88rem; font-weight: 700; text-align: right; }
+.budget-left  { font-size: 0.68rem; font-weight: 600; text-align: right; margin-top: 2px; }
+.alert-box {
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 9px 13px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #b45309;
+  margin-bottom: 9px;
+}
+.alert-box.danger { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+
+/* ── SAVINGS ─────────────────────────────── */
+.savings-hero {
+  background: #e8f3ef;
+  border-radius: 18px;
+  padding: 26px 20px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.savings-hero .big-num { font-size: 2.8rem; font-weight: 700; color: #1e4a6e; letter-spacing: -1px; }
+.savings-hero .big-lbl { font-size: 0.82rem; color: #2c7a5e; font-weight: 600; margin-top: 5px; }
+.savings-hero .big-note { font-size: 0.72rem; color: #5b6e8c; margin-top: 3px; }
+
+.cmp-item { margin-bottom: 13px; }
+.cmp-label { display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 600; margin-bottom: 5px; color: #2c4c6c; }
+.cmp-bar { height: 9px; background: #eef2f8; border-radius: 99px; overflow: hidden; }
+.cmp-fill { height: 100%; border-radius: 99px; transition: width 0.5s; }
+
+/* ── DONUT ───────────────────────────────── */
+.donut-wrap { display: flex; align-items: center; gap: 16px; }
+.donut-legend { flex: 1; }
+.leg-row { display: flex; align-items: center; gap: 7px; padding: 3px 0; font-size: 0.75rem; }
+.leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.leg-name { flex: 1; color: #5b6e8c; }
+.leg-pct { font-weight: 700; color: #1e4a6e; }
+.leg-amt { font-size: 0.65rem; color: #8ba0bc; margin-left: 4px; }
+
+/* ── HEATMAP ─────────────────────────────── */
+.heatmap-card { background: white; border-radius: 20px; padding: 18px 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 12px; }
+.cal-weekday { text-align: center; padding: 6px 2px; font-weight: 700; font-size: 0.65rem; color: #5b6e8c; }
+.cal-day { text-align: center; padding: 8px 2px; border-radius: 10px; font-size: 0.65rem; font-weight: 600; transition: 0.1s; cursor: default; }
+.cal-day.l0 { background: #f1f5f9; color: #64748b; }
+.cal-day.l1 { background: #dcfce7; color: #166534; }
+.cal-day.l2 { background: #bbf7d0; color: #14532d; }
+.cal-day.l3 { background: #86efac; color: #064e3b; }
+.cal-day.l4 { background: #4ade80; color: #064e3b; font-weight: 700; }
+.cal-day.today { border: 2px solid #2c7a5e; }
+.cal-legend { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.cal-leg-item { display: flex; align-items: center; gap: 5px; font-size: 0.65rem; color: #5b6e8c; }
+.cal-leg-box { width: 20px; height: 20px; border-radius: 6px; }
+.refresh-note { text-align: center; font-size: 0.65rem; color: #8ba0bc; margin-top: 10px; }
+
+/* ── DAILY CHART ─────────────────────────── */
+.daily-chart { display: flex; align-items: flex-end; gap: 3px; height: 65px; overflow-x: auto; margin-bottom: 4px; }
+.daily-labels { display: flex; gap: 3px; overflow-x: auto; }
+
+/* ── TX ROW ──────────────────────────────── */
+.tx-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f0f4fa; }
+.tx-row:last-child { border-bottom: none; }
+.tx-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.tx-info { flex: 1; min-width: 0; }
+.tx-desc { font-size: 0.8rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tx-meta { font-size: 0.65rem; color: #8ba0bc; margin-top: 1px; }
+.tx-amt { font-size: 0.85rem; font-weight: 700; white-space: nowrap; }
+.tx-amt.expense { color: #b45309; }
+.tx-amt.income  { color: #2c7a5e; }
+
+/* ── MODAL ───────────────────────────────── */
+.modal {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 500;
+  visibility: hidden; opacity: 0;
+  transition: 0.2s;
+  padding: 16px;
+}
+.modal.open { visibility: visible; opacity: 1; }
+.modal-card {
+  background: white;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+}
+.modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #eef2f8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky; top: 0;
+  background: white; z-index: 2;
+}
+.modal-header h3 { font-weight: 700; font-size: 1.1rem; color: #1e4a6e; }
+.modal-close {
+  background: #f1f4f9; border: none; border-radius: 50%;
+  width: 30px; height: 30px;
+  font-size: 1.1rem; cursor: pointer; color: #5b6e8c;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1;
+}
+.modal-close:hover { background: #e2e8f0; }
+.modal-body { padding: 18px 20px; }
+.modal-footer { display: flex; gap: 10px; margin-top: 16px; }
+.modal-footer .btn-primary { flex: 1; justify-content: center; display: flex; align-items: center; }
+.btn-cancel {
+  flex: 1;
+  background: #eef2f7; color: #5b6e8c;
+  border: none; padding: 10px;
+  border-radius: 40px;
+  font-family: inherit; font-size: 0.85rem; font-weight: 600;
+  cursor: pointer;
+}
+.btn-cancel:hover { background: #e2e8f0; }
+
+/* ── FORM ────────────────────────────────── */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-field { margin-bottom: 13px; }
+.form-field label { font-size: 0.68rem; font-weight: 700; color: #5b6e8c; display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.3px; }
+.form-field input, .form-field select, .form-field textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 40px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.85rem;
+  font-family: inherit;
+  background: #fafcff;
+  color: #1a2c3e;
+  outline: none;
+  transition: 0.15s;
+}
+.form-field textarea { border-radius: 14px; resize: vertical; min-height: 54px; }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: #2c7a5e; background: white; }
+
+/* ── TYPE TOGGLE ─────────────────────────── */
+.type-toggle { display: flex; gap: 5px; background: #f1f4f9; padding: 4px; border-radius: 40px; margin-bottom: 14px; }
+.type-btn {
+  flex: 1; padding: 8px; border-radius: 40px; border: none;
+  font-family: inherit; font-size: 0.8rem; font-weight: 600;
+  cursor: pointer; background: transparent; color: #5b6e8c; transition: 0.2s;
+}
+.type-btn.active-exp { background: white; color: #b45309; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+.type-btn.active-inc { background: white; color: #2c7a5e; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+
+/* ── SUMMARY TABLE ───────────────────────── */
+.sum-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+.sum-table th { text-align: left; padding: 9px 10px; background: #fafcff; color: #2c4c6c; font-weight: 700; border-bottom: 2px solid #eef2f8; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.3px; }
+.sum-table td { padding: 9px 10px; border-bottom: 1px solid #f0f4fa; }
+.sum-table tr:last-child td { border-bottom: none; }
+.sum-table tfoot td { font-weight: 700; border-top: 2px solid #eef2f8; }
+
+/* ── GROUP ROW ───────────────────────────── */
+.group-row { cursor: pointer; }
+.group-row td { background: #f4f9fe; font-weight: 700; padding: 11px 12px; font-size: 0.82rem; }
+.child-row td { padding-left: 28px; }
+
+/* ── TOAST ───────────────────────────────── */
+.toast {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  background: #1e293b; color: white;
+  padding: 9px 22px; border-radius: 50px;
+  font-size: 0.78rem; font-weight: 500;
+  z-index: 999; opacity: 0; transition: 0.2s;
+  pointer-events: none; white-space: nowrap;
+}
+
+/* ── EMPTY ───────────────────────────────── */
+.empty { text-align: center; padding: 36px 16px; color: #8ba0bc; font-size: 0.82rem; }
+.empty-td { text-align: center; padding: 40px 16px; color: #8ba0bc; font-size: 0.82rem; }
+
+/* ── OVERVIEW DASHBOARD ──────────────────── */
+.ov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.ov-list-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #f0f4fa; font-size: 0.82rem; }
+.ov-list-row:last-child { border-bottom: none; }
+.ov-list-name { font-weight: 600; }
+.ov-list-sub  { font-size: 0.65rem; color: #8ba0bc; margin-top: 1px; }
+
+/* ── RESPONSIVE ──────────────────────────── */
+@media (max-width: 768px) {
+  .grid-2  { grid-template-columns: 1fr; }
+  .grid-3  { grid-template-columns: 1fr 1fr; }
+  .cat-grid{ grid-template-columns: 1fr 1fr; }
+  .ov-grid { grid-template-columns: 1fr; }
+  .form-row{ grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  body { font-size: 13px; }
+  .brand { font-size: 1rem; margin-right: 12px; }
+  .nav-btn { padding: 0 10px; font-size: 0.75rem; }
+  .page { padding: 12px; }
+  .stat-card .s-value { font-size: 1.3rem; }
+  .grid-3  { grid-template-columns: 1fr 1fr; }
+  .savings-hero .big-num { font-size: 2rem; }
+  .cal-grid { gap: 3px; }
+  .cal-day  { padding: 6px 1px; font-size: 0.6rem; }
 }
 </style>
 </head>
 <body>
 
-<!-- COUNTDOWN -->
-<div id="cd-bar">
-  <div class="cd-tag">🎓 Student Offer</div>
-  <span class="cd-lbl">Special discount ends in:</span>
-  <div class="cd-times">
-    <div class="cd-b"><span class="cd-n" id="cd-d">14</span><span class="cd-u">Days</span></div>
-    <div class="cd-b"><span class="cd-n" id="cd-h">09</span><span class="cd-u">Hrs</span></div>
-    <div class="cd-b"><span class="cd-n" id="cd-m">24</span><span class="cd-u">Min</span></div>
-    <div class="cd-b"><span class="cd-n" id="cd-s">00</span><span class="cd-u">Sec</span></div>
-  </div>
-</div>
-
-<!-- NAV -->
-<nav>
-  <a href="#hero" class="logo">Tefin<span class="logo-dot"></span>Services</a>
-  <ul>
-    <li><a href="#plans-sec">Meal Plans</a></li>
-    <li><a href="#juice-sec">Juices</a></li>
-    <li><a href="#addons-sec">Add-Ons</a></li>
-    <li><a href="#sweets-sec">Sweets & Kitchen</a></li>
-  </ul>
-  <div class="nav-r">
-    <button class="cart-btn" onclick="toggleCart()">
-      🍱 <span id="cart-lbl">My Box</span>
-      <div class="cart-badge" id="cart-badge">0</div>
-    </button>
-    <button class="btn-cta" onclick="toggleCart()">Order Now</button>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-decor">
-    <div class="hc1"></div><div class="hc2"></div>
-    <span class="sp" style="top:15%;left:5%;animation-delay:0s">🌶️</span>
-    <span class="sp" style="top:68%;left:7%;animation-delay:2s">🫙</span>
-    <span class="sp" style="top:22%;right:5%;animation-delay:1s">🌿</span>
-    <span class="sp" style="top:58%;right:4%;animation-delay:3.5s">🌾</span>
-  </div>
-  <div class="hero-l">
-    <div class="hero-badge"><span class="pdot"></span>Now Accepting Orders — Pickup Daily</div>
-    <h1 class="hh">
-      <span class="l1">Ghar Ka Khana,</span>
-      <span class="l2">Every Single Day.</span>
-      <span class="l3">Fresh · Wholesome · Made with Love</span>
-    </h1>
-    <p class="hero-desc">Homestyle Indian tiffin meals for students, office professionals, and fitness lovers — cooked fresh daily, packed hygienically, ready for you to pick up.</p>
-    <div class="hero-btns">
-      <a href="#plans-sec" class="btn-p">🍱 Choose Your Meal Plan</a>
-      <a href="#juice-sec" class="btn-o">🧃 Add Fresh Juice</a>
-    </div>
-    <div class="trust-row">
-      <span class="tr-item">✅ No preservatives</span>
-      <span class="tr-sep"></span>
-      <span class="tr-item">♻️ Eco bottles</span>
-      <span class="tr-sep"></span>
-      <span class="tr-item">🧾 Monthly billing</span>
-      <span class="tr-sep"></span>
-      <span class="tr-item">🛑 Cancel anytime</span>
-    </div>
-  </div>
-  <div class="hero-r">
-    <div style="position:relative">
-      <div class="fb fb1">🎓 Student — ₹80/meal</div>
-      <div class="fb fb2">💼 Office — ₹120/meal</div>
-      <div class="fb fb3">🧃 Fresh Juice ₹40-50</div>
-      <div class="tiffin-wrap" id="heroTiffin" onclick="heroOpen()" title="Tap to open!">
-        <svg viewBox="0 0 370 408" width="370" height="408">
-          <ellipse cx="185" cy="396" rx="138" ry="9" fill="rgba(0,0,0,.1)"/>
-          <!-- BASE -->
-          <rect x="28" y="196" width="314" height="196" rx="22" fill="#C0392B"/>
-          <rect x="28" y="196" width="314" height="38" fill="#A93226"/>
-          <rect x="28" y="220" width="314" height="7" fill="#E74C3C" opacity=".35"/>
-          <!-- Bands -->
-          <rect x="20" y="246" width="330" height="9" rx="4.5" fill="#B0BEC5"/>
-          <rect x="20" y="296" width="330" height="9" rx="4.5" fill="#B0BEC5"/>
-          <rect x="20" y="346" width="330" height="9" rx="4.5" fill="#B0BEC5"/>
-          <rect x="46" y="202" width="86" height="183" rx="9" fill="white" opacity=".05"/>
-          <!-- Meal reveal -->
-          <g id="hm" style="opacity:0;transition:opacity .5s .3s">
-            <rect x="40" y="212" width="96" height="76" rx="11" fill="#F4A460" opacity=".93"/>
-            <text x="88" y="254" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5D3A1A" font-weight="700">Chapati</text>
-            <rect x="146" y="212" width="96" height="76" rx="11" fill="#F1C40F" opacity=".9"/>
-            <text x="194" y="254" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7D6608" font-weight="700">Dal</text>
-            <rect x="252" y="212" width="86" height="76" rx="11" fill="#ECF0F1" opacity=".9"/>
-            <text x="295" y="254" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#555" font-weight="700">Rice</text>
-            <rect x="40" y="298" width="130" height="72" rx="11" fill="#27AE60" opacity=".85"/>
-            <text x="105" y="338" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#145A32" font-weight="700">Bhaji/Sabzi</text>
-            <rect x="180" y="298" width="78" height="72" rx="11" fill="#F39C12" opacity=".85"/>
-            <text x="219" y="338" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#784212" font-weight="700">Pickle</text>
-            <rect x="268" y="298" width="70" height="72" rx="11" fill="#D5DBDB" opacity=".9"/>
-            <text x="303" y="338" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#555" font-weight="700">Papad</text>
-          </g>
-          <!-- LID -->
-          <g id="hl" style="transform-origin:185px 205px;transition:transform .72s cubic-bezier(0.34,1.4,0.64,1)">
-            <rect x="18" y="132" width="334" height="88" rx="22" fill="#E74C3C"/>
-            <rect x="18" y="132" width="334" height="34" rx="22" fill="#CB4335"/>
-            <ellipse cx="185" cy="132" rx="167" ry="27" fill="#EC7063"/>
-            <ellipse cx="185" cy="125" rx="167" ry="25" fill="#E74C3C"/>
-            <!-- Handle -->
-            <rect x="126" y="66" width="118" height="68" rx="14" fill="#CFD8DC"/>
-            <rect x="134" y="74" width="102" height="52" rx="10" fill="#ECEFF1"/>
-            <circle cx="185" cy="92" r="14" fill="#B0BEC5"/>
-            <circle cx="185" cy="92" r="8" fill="#90A4AE"/>
-            <!-- Brand text -->
-            <text x="185" y="166" text-anchor="middle" font-family="Playfair Display,serif" font-size="17" fill="white" font-weight="900" letter-spacing="2">TEFIN</text>
-            <text x="185" y="184" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.68)" font-weight="600" letter-spacing="4">SERVICES</text>
-            <rect x="36" y="135" width="98" height="80" rx="12" fill="white" opacity=".055"/>
-            <!-- Clips -->
-            <rect x="18" y="202" width="48" height="13" rx="6.5" fill="#90A4AE"/>
-            <rect x="304" y="202" width="48" height="13" rx="6.5" fill="#90A4AE"/>
-          </g>
-        </svg>
-        <div class="tap-hint" id="tapHint">👆 Tap to open your tiffin!</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<div class="stats">
-  <div class="st-item"><span class="st-n">500+</span><span class="st-l">Happy Customers</span></div>
-  <div class="st-sep"></div>
-  <div class="st-item"><span class="st-n">4</span><span class="st-l">Meal Plans</span></div>
-  <div class="st-sep"></div>
-  <div class="st-item"><span class="st-n">₹80</span><span class="st-l">Student Meal</span></div>
-  <div class="st-sep"></div>
-  <div class="st-item"><span class="st-n">100%</span><span class="st-l">Fresh Daily</span></div>
-  <div class="st-sep"></div>
-  <div class="st-item"><span class="st-n">♻️</span><span class="st-l">Reusable Bottles</span></div>
-</div>
-
-<!-- PICKUP BANNER -->
-<div class="pickup">
-  <div class="pickup-ico">🛵</div>
-  <div class="pickup-body">
-    <h3>Currently: Pickup Service Only</h3>
-    <p>To ensure maximum freshness and hygiene, we currently offer <strong style="color:var(--gold)">self-pickup only</strong> from our kitchen. Come collect your tiffin at your chosen time slot. <strong style="color:var(--gold)">Home delivery is coming soon</strong> — stay tuned!</p>
-    <div class="pickup-chips">
-      <span class="pc">📍 Pickup from our kitchen</span>
-      <span class="pc">⏰ 12–1 PM & 7–8 PM</span>
-      <span class="pc">🚀 Delivery coming soon</span>
-      <span class="pc">📞 Call to confirm slot</span>
+<!-- TOP NAV -->
+<div class="top-nav">
+  <div class="top-nav-inner">
+    <div class="brand">TiffinDesk</div>
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="showPage('overview',this)">Overview</button>
+      <button class="nav-btn" onclick="showPage('customers',this)">Customers</button>
+      <button class="nav-btn" onclick="showPage('delivery',this)">Delivery</button>
+      <button class="nav-btn" onclick="showPage('billing',this)">Billing</button>
+      <button class="nav-btn" onclick="showPage('expenses',this)">Expenses</button>
     </div>
   </div>
 </div>
 
-<!-- PLANS SECTION -->
-<div id="plans-sec" class="sec bg-w">
-  <div class="inner">
-    <div class="plans-head rv">
-      <div class="sec-tag" style="justify-content:center">Our Meal Plans</div>
-      <h2 class="sec-title" style="text-align:center">Pick Your Perfect Tiffin Box</h2>
-      <p class="sec-sub" style="margin:0 auto;text-align:center">Each meal is cooked fresh every morning. Add to your meal box and customise with extras.</p>
-    </div>
-    <div class="tab-wrap rv">
-      <div class="tabs">
-        <button class="tab active" onclick="switchPlan('office',this)">💼 Office Plan</button>
-        <button class="tab" onclick="switchPlan('student',this)">🎓 Student Plan</button>
-        <button class="tab" onclick="switchPlan('regular',this)">🏠 Regular Tiffin</button>
+<!-- ═══════════════════════════════════════
+     OVERVIEW PAGE
+════════════════════════════════════════ -->
+<div id="page-overview" class="page active">
+<div class="container">
 
-      </div>
+  <div class="header-card">
+    <h1>Dashboard Overview</h1>
+    <p>Your tiffin business at a glance</p>
+    <div class="header-card-bottom">
+      <span class="date-pill" id="ov-date">Loading...</span>
+      <button class="btn-primary" onclick="showPage('customers',document.querySelectorAll('.nav-btn')[1])">+ New Customer</button>
     </div>
-
-    <!-- OFFICE PLAN -->
-    <div class="pnl active" id="pp-office">
-      <div>
-        <div class="plan-card">
-          <div class="pa" style="background:var(--steel)"></div>
-          <div class="badge-row">
-            <span class="bdg bdg-pro">💼 Most Popular</span>
-            <span class="bdg bdg-hot">⭐ Office Favourite</span>
-          </div>
-          <div class="plan-name">Office Tiffin</div>
-          <div class="plan-tag">Balanced, energising homestyle meal for the working professional. Stay fuelled through your afternoon.</div>
-          <div class="price-block">
-            <div class="price-main">
-              <span class="price-big" style="color:var(--steel)">₹120</span>
-              <span class="price-per">per meal</span>
-            </div>
-            <div class="price-btm">
-              <span class="price-opt active">With Buttermilk — ₹120</span>
-              <span class="price-opt" id="office-no-bm" style="cursor:pointer" onclick="showOfficeNoBtn()">Without Buttermilk — ₹90</span>
-            </div>
-            <div id="office-bm-note" style="margin-top:10px;font-size:13px;color:var(--muted);padding-top:8px;border-top:1px solid var(--border)">
-              💡 <strong>Don't want buttermilk?</strong> Simply let us know and we'll serve your tiffin at <strong style="color:var(--saffron)">₹90/meal</strong>
-            </div>
-          </div>
-          <ul class="meal-list">
-            <li class="ml-i"><div class="ml-ico">🫓</div>4 Fresh Chapati / Roti (soft, hot)</li>
-            <li class="ml-i"><div class="ml-ico">🍛</div>1 Bhaji (rotating seasonal)</li>
-            <li class="ml-i"><div class="ml-ico">🍚</div>Steamed Rice</li>
-            <li class="ml-i"><div class="ml-ico">🍛</div>Dal</li>
-            <li class="ml-i"><div class="ml-ico b">🥛</div>Buttermilk (optional — skip for ₹90)</li>
-          </ul>
-          <div style="display:flex;gap:10px;margin-bottom:0">
-            <button class="add-btn" style="background:var(--steel)" onclick="addToCart('office-120','Office Tiffin (with Buttermilk)','💼',120,'meal','4 Chapati, Bhaji, Rice, Dal, Buttermilk')">
-              🍱 Add with Buttermilk — ₹120
-            </button>
-          </div>
-          <button class="add-btn" style="margin-top:10px;background:var(--clay)" onclick="addToCart('office-90','Office Tiffin (no Buttermilk)','💼',90,'meal','4 Chapati, Bhaji, Rice, Dal — No Buttermilk')">
-            🍱 Add without Buttermilk — ₹90
-          </button>
-        </div>
-      </div>
-      <div class="plan-vis rr">
-        <div class="vis-title">💼 What's in your Office Box</div>
-        <div class="meal-chips">
-          <div class="mc"><span class="mc-ico">🫓</span>4 Fresh Chapati</div>
-          <div class="mc"><span class="mc-ico">🍛</span>Seasonal Bhaji</div>
-          <div class="mc"><span class="mc-ico">🍚</span>Steamed Rice</div>
-          <div class="mc"><span class="mc-ico">🍛</span>Dal</div>
-          <div class="mc"><span class="mc-ico">🥛</span>Buttermilk (opt.)</div>
-          <div class="mc"><span class="mc-ico">💧</span>Fresh & hot daily</div>
-        </div>
-        <div class="nut-box">
-          <div class="nut-lbl">Approx. Nutrition Per Meal</div>
-          <div class="nut-row"><span class="nk">Calories</span><span class="nv">~720 kcal</span></div>
-          <div class="nut-row"><span class="nk">Protein</span><span class="nv">24 g</span></div>
-          <div class="nut-row"><span class="nk">Carbohydrates</span><span class="nv">105 g</span></div>
-          <div class="nut-row"><span class="nk">Fats</span><span class="nv">18 g</span></div>
-          <div class="nut-row"><span class="nk">Fibre</span><span class="nv">8 g</span></div>
-        </div>
-        <!-- Price Visual -->
-        <div style="width:100%;margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div style="background:var(--cream);border:2px solid var(--border);border-radius:13px;padding:14px;text-align:center">
-            <div style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:6px">With Buttermilk</div>
-            <div style="font-family:'Playfair Display',serif;font-size:30px;font-weight:900;color:var(--steel)">₹120</div>
-            <div style="font-size:11px;color:var(--muted);margin-top:3px">per meal</div>
-          </div>
-          <div style="background:rgba(122,59,16,.07);border:2px solid rgba(122,59,16,.2);border-radius:13px;padding:14px;text-align:center">
-            <div style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--clay);text-transform:uppercase;margin-bottom:6px">No Buttermilk</div>
-            <div style="font-family:'Playfair Display',serif;font-size:30px;font-weight:900;color:var(--clay)">₹90</div>
-            <div style="font-size:11px;color:var(--muted);margin-top:3px">per meal</div>
-          </div>
-        </div>
-        <div class="green-note">✅ No artificial colours, preservatives, or MSG. Cooked fresh every morning in a hygienic kitchen.</div>
-      </div>
-    </div>
-
-    <!-- STUDENT PLAN -->
-    <div class="pnl" id="pp-student">
-      <div>
-        <div class="plan-card">
-          <div class="pa"></div>
-          <div class="badge-row">
-            <span class="bdg bdg-hot">🔥 Limited Offer</span>
-            <span class="bdg bdg-new">🎓 Student Discount</span>
-          </div>
-          <div class="plan-name">Student Tiffin</div>
-          <div class="plan-tag">Same wholesome homestyle meal — with a special student discount. Show your student ID to avail.</div>
-          <div class="price-block">
-            <div class="price-main">
-              <span class="price-big">₹80</span>
-              <span class="price-per">per meal</span>
-            </div>
-            <div class="price-btm">
-              <span class="price-opt active">Student Rate</span>
-              <span class="price-save">🎉 Save ₹40 vs regular!</span>
-            </div>
-            <div style="margin-top:10px;font-size:13px;color:var(--muted);padding-top:8px;border-top:1px solid var(--border)">
-              🎓 <strong>Valid for students with ID card.</strong> Same great meal as office plan — just at a discounted rate. Offer valid till <strong style="color:var(--saffron)">30 June 2025</strong>.
-            </div>
-          </div>
-          <ul class="meal-list">
-            <li class="ml-i"><div class="ml-ico">🫓</div>4 Fresh Chapati / Roti</li>
-            <li class="ml-i"><div class="ml-ico">🍛</div>1 Bhaji (rotating seasonal)</li>
-            <li class="ml-i"><div class="ml-ico">🍚</div>Steamed Rice</li>
-            <li class="ml-i"><div class="ml-ico">🍛</div>Dal</li>
-            <li class="ml-i"><div class="ml-ico b">🥛</div>Buttermilk (optional — ask at pickup)</li>
-            <li class="ml-i"><div class="ml-ico g">🎟️</div>Requires valid student ID card</li>
-          </ul>
-          <button class="add-btn" onclick="addToCart('student-80','Student Tiffin','🎓',80,'meal','4 Chapati, Bhaji, Rice, Dal — Student rate (ID required)')">
-            🍱 Add Student Meal — ₹80
-          </button>
-        </div>
-      </div>
-      <div class="plan-vis rr">
-        <div class="vis-title">🎓 Student Meal — Same Great Food</div>
-        <div class="meal-chips">
-          <div class="mc"><span class="mc-ico">🫓</span>4 Fresh Chapati</div>
-          <div class="mc"><span class="mc-ico">🍛</span>Seasonal Bhaji</div>
-          <div class="mc"><span class="mc-ico">🍚</span>Steamed Rice</div>
-          <div class="mc"><span class="mc-ico">🍛</span>Dal</div>
-          <div class="mc"><span class="mc-ico">🥛</span>Buttermilk (opt.)</div>
-          <div class="mc"><span class="mc-ico">🎟️</span>ID card needed</div>
-        </div>
-        <!-- Comparison -->
-        <div style="width:100%;margin-bottom:16px;background:rgba(232,99,26,.05);border:1.5px solid rgba(232,99,26,.15);border-radius:13px;padding:16px">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--saffron);margin-bottom:12px">Price Comparison</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-            <span style="font-size:13px;color:var(--muted)">Regular rate</span>
-            <span style="font-size:15px;font-weight:700;color:var(--muted);text-decoration:line-through">₹120</span>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-            <span style="font-size:13px;color:var(--mint-d);font-weight:600">Your rate (student)</span>
-            <span style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--saffron)">₹80</span>
-          </div>
-          <div style="background:rgba(29,185,84,.1);border-radius:8px;padding:7px 10px;font-size:12px;font-weight:700;color:var(--mint-d);text-align:center">
-            🎉 You save ₹40 per meal · ₹1,200/month (30 meals)
-          </div>
-        </div>
-        <div class="nut-box">
-          <div class="nut-lbl">Approx. Nutrition Per Meal</div>
-          <div class="nut-row"><span class="nk">Calories</span><span class="nv">~720 kcal</span></div>
-          <div class="nut-row"><span class="nk">Protein</span><span class="nv">24 g</span></div>
-          <div class="nut-row"><span class="nk">Carbs</span><span class="nv">105 g</span></div>
-          <div class="nut-row"><span class="nk">Fats</span><span class="nv">18 g</span></div>
-        </div>
-        <div class="green-note">✅ Identical meal to Office Plan — same quality, same ingredients, just a better price for students!</div>
-      </div>
-    </div>
-
-    <!-- REGULAR PLAN -->
-    <div class="pnl" id="pp-regular">
-      <div>
-        <div class="plan-card">
-          <div class="pa c"></div>
-          <div class="badge-row">
-            <span class="bdg bdg-stu">🏠 Family Style</span>
-          </div>
-          <div class="plan-name">Regular Tiffin</div>
-          <div class="plan-tag">Classic ghar ka khana — traditional flavours, generous portions, every single day. Daily & weekly options.</div>
-          <div class="price-block">
-            <div class="price-main">
-              <span class="price-big" style="color:var(--clay)">₹120</span>
-              <span class="price-per">per meal</span>
-            </div>
-            <div class="price-btm">
-              <span class="price-opt active">Standard Rate</span>
-              <span class="price-opt">Daily / Weekly options</span>
-            </div>
-          </div>
-          <ul class="meal-list">
-            <li class="ml-i"><div class="ml-ico">🫓</div>4–5 Fresh Chapati / Roti</li>
-            <li class="ml-i"><div class="ml-ico">🍛</div>1 Bhaji (seasonal rotating)</li>
-            <li class="ml-i"><div class="ml-ico">🍛</div>Dal (Tadka / Sambar / Khichdi)</li>
-            <li class="ml-i"><div class="ml-ico">🍚</div>Rice + Papad</li>
-            <li class="ml-i"><div class="ml-ico">🥗</div>Fresh Salad + Home Pickle</li>
-            <li class="ml-i"><div class="ml-ico g">🍮</div>Sunday Sweet (bonus)</li>
-          </ul>
-          <button class="add-btn" style="background:var(--clay)" onclick="addToCart('regular','Regular Tiffin','🏠',120,'meal','4-5 Chapati, Bhaji, Dal, Rice, Salad, Pickle + Sunday Sweet')">
-            🍱 Add Regular Tiffin — ₹120
-          </button>
-        </div>
-      </div>
-      <div class="plan-vis rr">
-        <div class="vis-title">🏠 What's in your Regular Box</div>
-        <div class="meal-chips">
-          <div class="mc"><span class="mc-ico">🫓</span>4–5 Chapati</div>
-          <div class="mc"><span class="mc-ico">🍛</span>Seasonal Bhaji</div>
-          <div class="mc"><span class="mc-ico">🍛</span>Dal Tadka</div>
-          <div class="mc"><span class="mc-ico">🍚</span>Rice + Papad</div>
-          <div class="mc"><span class="mc-ico">🥗</span>Fresh Salad</div>
-          <div class="mc"><span class="mc-ico">🫙</span>Home Pickle</div>
-        </div>
-        <div class="nut-box" style="background:rgba(122,59,16,.04);border-color:rgba(122,59,16,.12)">
-          <div class="nut-lbl" style="color:var(--clay)">Approx. Nutrition Per Meal</div>
-          <div class="nut-row"><span class="nk">Calories</span><span class="nv">~750 kcal</span></div>
-          <div class="nut-row"><span class="nk">Protein</span><span class="nv">22 g</span></div>
-          <div class="nut-row"><span class="nk">Carbs</span><span class="nv">100 g</span></div>
-          <div class="nut-row"><span class="nk">Fats</span><span class="nv">20 g</span></div>
-        </div>
-        <div class="green-note">🔁 Daily and weekly subscriptions available. Cancel anytime. Call us for custom meal preferences.</div>
-      </div>
-    </div>
-
-    <!-- GYM PLAN -->
   </div>
+
+  <div class="stats-row" id="ov-stats"></div>
+
+  <div class="ov-grid">
+    <div class="card" style="margin:0">
+      <div class="card-header">
+        <div class="card-title">Today's Deliveries</div>
+        <button class="btn-sm btn-edit" onclick="showPage('delivery',document.querySelectorAll('.nav-btn')[2])">View all</button>
+      </div>
+      <div id="ov-deliveries"></div>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="card-header">
+        <div class="card-title">Pending Payments</div>
+        <button class="btn-sm btn-edit" onclick="showPage('billing',document.querySelectorAll('.nav-btn')[3])">View all</button>
+      </div>
+      <div id="ov-payments"></div>
+    </div>
+  </div>
+
+  <div class="ov-grid">
+    <div class="card" style="margin:0">
+      <div class="card-header">
+        <div class="card-title">Open Tickets</div>
+      </div>
+      <div id="ov-tickets"></div>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="card-header">
+        <div class="card-title">This Month — Expense vs Income</div>
+      </div>
+      <div id="ov-finance"></div>
+    </div>
+  </div>
+
+</div>
 </div>
 
-<!-- GYM & FITNESS BOX — STANDALONE SECTION -->
-<div id="gym-sec" style="background:linear-gradient(135deg,#0D2B1A 0%,#1B5E20 60%,#0A3D1F 100%);padding:80px 0">
-  <div class="inner" style="max-width:1160px;margin:0 auto;padding:0 80px">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center">
-      <!-- LEFT: Info -->
-      <div class="rl">
-        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(29,185,84,.2);border:1px solid rgba(29,185,84,.35);color:#6EE79A;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:24px;margin-bottom:20px">
-          <span style="width:7px;height:7px;background:#1DB954;border-radius:50%;animation:pulseA 2s infinite;display:inline-block"></span>
-          Gym & Fitness
-        </div>
-        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:900;color:#fff;line-height:1;letter-spacing:-1.5px;margin-bottom:14px">Gym &<br><span style="color:#6EE79A;font-style:italic">Fitness Box</span></h2>
-        <p style="font-size:16px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:28px;max-width:400px">High-protein, macro-balanced clean fuel. No chapati — just the right food for your fitness goals. Juice included.</p>
+<!-- ═══════════════════════════════════════
+     CUSTOMERS PAGE
+════════════════════════════════════════ -->
+<div id="page-customers" class="page">
+<div class="container">
 
-        <!-- PRICE BLOCK -->
-        <div style="background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);border-radius:18px;padding:20px 22px;margin-bottom:24px;display:inline-block">
-          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px">Per Box</div>
-          <div style="font-family:'Playfair Display',serif;font-size:52px;font-weight:900;color:#6EE79A;line-height:1">₹180</div>
-          <div style="font-size:13px;color:rgba(255,255,255,.55);margin-top:4px">🥤 Fresh juice included · No chapati</div>
-        </div>
+  <div class="header-card">
+    <h1>Customer Manager</h1>
+    <p>Add, edit and manage your tiffin customers</p>
+    <div class="header-card-bottom">
+      <span class="date-pill" id="cust-count-pill">0 active</span>
+      <button class="btn-primary" onclick="openCustModal()">+ New Customer</button>
+    </div>
+  </div>
 
-        <!-- ITEMS LIST -->
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px">
-          <li style="display:flex;align-items:center;gap:12px;font-size:15px;color:rgba(255,255,255,.85)">
-            <span style="width:34px;height:34px;background:rgba(29,185,84,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">🥚</span>
-            Boiled Eggs — 4 pcs
-          </li>
-          <li style="display:flex;align-items:center;gap:12px;font-size:15px;color:rgba(255,255,255,.85)">
-            <span style="width:34px;height:34px;background:rgba(29,185,84,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">🧀</span>
-            Paneer Roll / Paneer Tikka
-          </li>
-          <li style="display:flex;align-items:center;gap:12px;font-size:15px;color:rgba(255,255,255,.85)">
-            <span style="width:34px;height:34px;background:rgba(29,185,84,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">🥗</span>
-            Large Diet Salad Bowl
-          </li>
-          <li style="display:flex;align-items:center;gap:12px;font-size:15px;color:rgba(255,255,255,.85)">
-            <span style="width:34px;height:34px;background:rgba(29,185,84,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">🌱</span>
-            Mixed Sprouts
-          </li>
-          <li style="display:flex;align-items:center;gap:12px;font-size:15px;color:rgba(255,255,255,.85)">
-            <span style="width:34px;height:34px;background:rgba(29,185,84,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">🧃</span>
-            Fresh Juice — Seasonal (200–300ml)
-          </li>
-          <li style="display:flex;align-items:center;gap:12px;font-size:15px;color:rgba(255,255,255,.85)">
-            <span style="width:34px;height:34px;background:rgba(29,185,84,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">🥒</span>
-            Cucumber + Lemon Slices
-          </li>
-        </ul>
-        <button class="add-btn g" style="width:auto;padding:14px 32px;font-size:16px;border-radius:32px" onclick="addToCart('gym-box','Gym & Fitness Box','💪',180,'box','Boiled Eggs, Paneer Roll, Diet Salad, Sprouts, Fresh Juice, Cucumber')">
-          💪 Add Fitness Box to My Box — ₹180
-        </button>
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <input type="text" id="cust-search" placeholder="Search name, phone, address..." oninput="renderCustomers()">
+    </div>
+    <select id="cust-plan-filter" class="f-select" onchange="renderCustomers()">
+      <option value="all">All Plans</option>
+      <option value="Daily">Daily</option>
+      <option value="Lunch">Lunch</option>
+      <option value="Dinner">Dinner</option>
+    </select>
+    <select id="cust-status-filter" class="f-select" onchange="renderCustomers()">
+      <option value="all">All Status</option>
+      <option value="Active">Active</option>
+      <option value="Paused">Paused</option>
+    </select>
+    <button id="cust-group-btn" class="toggle-btn" onclick="toggleCustGroup()">Group by Area</button>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Phone</th><th>Address</th>
+          <th>Plan</th><th>Rate</th><th>Status</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="cust-tbody"></tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     DELIVERY PAGE
+════════════════════════════════════════ -->
+<div id="page-delivery" class="page">
+<div class="container">
+
+  <div class="header-card">
+    <h1>Delivery Tracker</h1>
+    <p>Track daily tiffin deliveries — Pending → Sent → Delivered</p>
+    <div class="header-card-bottom">
+      <span class="date-pill" id="del-date-pill">Loading...</span>
+    </div>
+  </div>
+
+  <div class="stats-row" id="del-stats"></div>
+
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <input type="text" id="del-search" placeholder="Search by name or address..." oninput="renderDelivery()">
+    </div>
+    <select id="del-plan-filter" class="f-select" onchange="renderDelivery()">
+      <option value="all">All Plans</option>
+      <option value="Daily">Daily</option>
+      <option value="Lunch">Lunch</option>
+      <option value="Dinner">Dinner</option>
+    </select>
+    <button id="del-group-btn" class="toggle-btn" onclick="toggleDelGroup()">Group by Address</button>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Customer</th><th>Address</th><th>Plan</th><th>Status</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="del-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="heatmap-card">
+    <div class="card-title">Delivery Heatmap (Last 30 Days)</div>
+    <div class="cal-grid" id="cal-heatmap"></div>
+    <div class="cal-legend">
+      <div class="cal-leg-item"><div class="cal-leg-box" style="background:#f1f5f9"></div><span>0 delivered</span></div>
+      <div class="cal-leg-item"><div class="cal-leg-box" style="background:#dcfce7"></div><span>1–2</span></div>
+      <div class="cal-leg-item"><div class="cal-leg-box" style="background:#bbf7d0"></div><span>3–4</span></div>
+      <div class="cal-leg-item"><div class="cal-leg-box" style="background:#86efac"></div><span>5–6</span></div>
+      <div class="cal-leg-item"><div class="cal-leg-box" style="background:#4ade80"></div><span>7+</span></div>
+    </div>
+    <div class="refresh-note">Heatmap updates in real-time when you mark deliveries.</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     BILLING PAGE
+════════════════════════════════════════ -->
+<div id="page-billing" class="page">
+<div class="container">
+
+  <div class="header-card">
+    <h1>Billing Tracker</h1>
+    <p>Track collected vs pending bills for this month</p>
+    <div class="header-card-bottom">
+      <span class="date-pill" id="bill-month-pill">Loading...</span>
+      <button class="btn-primary" onclick="markAllPaid()">Mark All Paid</button>
+    </div>
+  </div>
+
+  <div class="stats-row" id="bill-stats"></div>
+
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <input type="text" id="bill-search" placeholder="Search by name or address..." oninput="renderBilling()">
+    </div>
+    <select id="bill-status-filter" class="f-select" onchange="renderBilling()">
+      <option value="all">All Customers</option>
+      <option value="paid">Paid Only</option>
+      <option value="pending">Pending Only</option>
+    </select>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Customer</th><th>Plan</th><th>Monthly Bill</th><th>Status</th><th>Action</th></tr>
+      </thead>
+      <tbody id="bill-tbody"></tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     EXPENSES PAGE
+════════════════════════════════════════ -->
+<div id="page-expenses" class="page">
+<div class="container">
+
+  <div class="header-card">
+    <h1>Expense Tracker</h1>
+    <p>Track purchases, income and savings for your tiffin business</p>
+    <div class="header-card-bottom">
+      <select id="exp-month-select" class="f-select" style="background:#e8f3ef;color:#2c7a5e;font-weight:700;border-color:#c5ddd5;" onchange="changeExpMonth()">
+        <option value="2026-06">June 2026</option>
+        <option value="2026-05">May 2026</option>
+        <option value="2026-04">April 2026</option>
+        <option value="2026-03">March 2026</option>
+      </select>
+      <button class="btn-primary" onclick="openExpModal()">+ Add Entry</button>
+    </div>
+  </div>
+
+  <div class="stats-row" id="exp-stats"></div>
+
+  <!-- Sub-tabs -->
+  <div class="filter-bar" style="padding:6px;gap:4px;margin-bottom:14px">
+    <button class="toggle-btn active" id="exp-tab-overview"  onclick="showExpTab('overview',this)">Overview</button>
+    <button class="toggle-btn" id="exp-tab-categories" onclick="showExpTab('categories',this)">Categories</button>
+    <button class="toggle-btn" id="exp-tab-transactions" onclick="showExpTab('transactions',this)">Transactions</button>
+    <button class="toggle-btn" id="exp-tab-budget"   onclick="showExpTab('budget',this)">Budget</button>
+    <button class="toggle-btn" id="exp-tab-savings"  onclick="showExpTab('savings',this)">Savings</button>
+  </div>
+
+  <!-- Overview -->
+  <div id="exp-overview" class="exp-section">
+    <div class="grid-2">
+      <div class="card" style="margin:0">
+        <div class="card-title">Expenses by category</div>
+        <div class="donut-wrap">
+          <svg id="exp-donut-svg" width="120" height="120" viewBox="0 0 120 120" style="flex-shrink:0"></svg>
+          <div id="exp-donut-legend" style="flex:1"></div>
+        </div>
       </div>
-
-      <!-- RIGHT: Visual Nutrition Card -->
-      <div class="rr">
-        <!-- Big SVG fitness box visual -->
-        <div style="background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);border-radius:24px;padding:28px;margin-bottom:16px">
-          <svg viewBox="0 0 320 200" width="100%" style="display:block;margin-bottom:16px">
-            <!-- Background -->
-            <rect width="320" height="200" fill="rgba(255,255,255,0.04)" rx="16"/>
-            <!-- Items as circles -->
-            <circle cx="46" cy="68" r="36" fill="rgba(29,185,84,.18)" stroke="rgba(29,185,84,.4)" stroke-width="1.5"/>
-            <text x="46" y="60" text-anchor="middle" font-size="22">🥚</text>
-            <text x="46" y="80" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.7)" font-weight="600">Eggs ×4</text>
-
-            <circle cx="130" cy="68" r="36" fill="rgba(29,185,84,.18)" stroke="rgba(29,185,84,.4)" stroke-width="1.5"/>
-            <text x="130" y="60" text-anchor="middle" font-size="22">🧀</text>
-            <text x="130" y="80" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.7)" font-weight="600">Paneer</text>
-
-            <circle cx="214" cy="68" r="36" fill="rgba(29,185,84,.18)" stroke="rgba(29,185,84,.4)" stroke-width="1.5"/>
-            <text x="214" y="60" text-anchor="middle" font-size="22">🥗</text>
-            <text x="214" y="80" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.7)" font-weight="600">Salad</text>
-
-            <circle cx="46" cy="158" r="30" fill="rgba(29,185,84,.18)" stroke="rgba(29,185,84,.4)" stroke-width="1.5"/>
-            <text x="46" y="151" text-anchor="middle" font-size="18">🌱</text>
-            <text x="46" y="169" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(255,255,255,.7)" font-weight="600">Sprouts</text>
-
-            <circle cx="120" cy="158" r="30" fill="rgba(29,185,84,.18)" stroke="rgba(29,185,84,.4)" stroke-width="1.5"/>
-            <text x="120" y="151" text-anchor="middle" font-size="18">🧃</text>
-            <text x="120" y="169" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(255,255,255,.7)" font-weight="600">Juice</text>
-
-            <circle cx="194" cy="158" r="30" fill="rgba(29,185,84,.18)" stroke="rgba(29,185,84,.4)" stroke-width="1.5"/>
-            <text x="194" y="151" text-anchor="middle" font-size="18">🥒</text>
-            <text x="194" y="169" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(255,255,255,.7)" font-weight="600">Cucumber</text>
-
-            <!-- Price badge -->
-            <rect x="244" y="130" width="68" height="58" rx="14" fill="#1DB954"/>
-            <text x="278" y="155" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.8)" font-weight="700">PER BOX</text>
-            <text x="278" y="175" text-anchor="middle" font-family="Playfair Display,serif" font-size="20" fill="white" font-weight="900">₹180</text>
-          </svg>
-
-          <!-- Nutrition grid -->
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-            <div style="background:rgba(29,185,84,.15);border:1px solid rgba(29,185,84,.25);border-radius:12px;padding:12px;text-align:center">
-              <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#6EE79A">42g</div>
-              <div style="font-size:11px;color:rgba(255,255,255,.6);font-weight:600;margin-top:2px;letter-spacing:.5px">PROTEIN</div>
-            </div>
-            <div style="background:rgba(29,185,84,.15);border:1px solid rgba(29,185,84,.25);border-radius:12px;padding:12px;text-align:center">
-              <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#6EE79A">580</div>
-              <div style="font-size:11px;color:rgba(255,255,255,.6);font-weight:600;margin-top:2px;letter-spacing:.5px">CALORIES</div>
-            </div>
-            <div style="background:rgba(29,185,84,.15);border:1px solid rgba(29,185,84,.25);border-radius:12px;padding:12px;text-align:center">
-              <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#6EE79A">38g</div>
-              <div style="font-size:11px;color:rgba(255,255,255,.6);font-weight:600;margin-top:2px;letter-spacing:.5px">CARBS</div>
-            </div>
-            <div style="background:rgba(29,185,84,.15);border:1px solid rgba(29,185,84,.25);border-radius:12px;padding:12px;text-align:center">
-              <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#6EE79A">11g</div>
-              <div style="font-size:11px;color:rgba(255,255,255,.6);font-weight:600;margin-top:2px;letter-spacing:.5px">FIBRE</div>
-            </div>
-          </div>
+      <div class="card" style="margin:0">
+        <div class="card-header">
+          <div class="card-title">Recent transactions</div>
+          <button class="btn-sm btn-edit" onclick="showExpTab('transactions',document.getElementById('exp-tab-transactions'))">See all</button>
         </div>
-        <div style="background:rgba(110,231,154,.1);border:1px solid rgba(110,231,154,.25);border-radius:12px;padding:13px 16px;font-size:13px;color:rgba(255,255,255,.72);line-height:1.6">
-          💪 No chapati — clean macros only. Veg option uses paneer. Fresh juice is seasonal (200–300ml, reusable bottle).
+        <div id="exp-recent-tx"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Daily spending this month</div>
+      <div class="daily-chart" id="exp-daily-chart"></div>
+      <div class="daily-labels" id="exp-daily-labels"></div>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div id="exp-categories" class="exp-section" style="display:none">
+    <div class="cat-grid" id="exp-cat-grid"></div>
+    <div class="card">
+      <div class="card-title">Income categories</div>
+      <div id="exp-income-cats"></div>
+    </div>
+  </div>
+
+  <!-- Transactions -->
+  <div id="exp-transactions" class="exp-section" style="display:none">
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <input type="text" id="exp-tx-search" placeholder="Search transactions..." oninput="renderExpTx()">
+      </div>
+      <select id="exp-tx-cat" class="f-select" onchange="renderExpTx()">
+        <option value="all">All Categories</option>
+      </select>
+      <select id="exp-tx-type" class="f-select" onchange="renderExpTx()">
+        <option value="all">All Types</option>
+        <option value="expense">Expense</option>
+        <option value="income">Income</option>
+      </select>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Date</th><th>Description</th><th>Category</th><th>Mode</th><th>Type</th><th>Amount</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="exp-tx-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Budget -->
+  <div id="exp-budget" class="exp-section" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div style="font-weight:700;color:#1e4a6e">Monthly Budget Limits</div>
+      <button class="btn-primary" style="padding:8px 18px;font-size:0.78rem" onclick="openBudgetModal()">Set Budgets</button>
+    </div>
+    <div id="exp-budget-alerts"></div>
+    <div id="exp-budget-list"></div>
+  </div>
+
+  <!-- Savings -->
+  <div id="exp-savings" class="exp-section" style="display:none">
+    <div class="savings-hero" id="exp-savings-hero"></div>
+    <div class="grid-2">
+      <div class="card" style="margin:0">
+        <div class="card-title">Income vs Expense</div>
+        <div id="exp-inc-cmp"></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="card-title">Category summary</div>
+        <div style="overflow-x:auto">
+          <table class="sum-table">
+            <thead><tr><th>Category</th><th>Spent</th><th>Budget</th></tr></thead>
+            <tbody id="exp-sum-tbody"></tbody>
+            <tfoot><tr>
+              <td>Total Expense</td>
+              <td id="exp-sum-total" style="color:#b45309;font-weight:700"></td>
+              <td></td>
+            </tr></tfoot>
+          </table>
         </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     CUSTOMER MODAL
+════════════════════════════════════════ -->
+<div id="modal-customer" class="modal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="cust-modal-title">Add Customer</h3>
+      <button class="modal-close" onclick="closeModal('modal-customer')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-field">
+          <label>Full Name *</label>
+          <input type="text" id="cm-name" placeholder="e.g. Priya Sharma">
+        </div>
+        <div class="form-field">
+          <label>Phone *</label>
+          <input type="tel" id="cm-phone" placeholder="9876543210">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Address</label>
+        <input type="text" id="cm-address" placeholder="Office / Home address">
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Plan</label>
+          <select id="cm-plan">
+            <option value="Daily">Daily (Lunch + Dinner)</option>
+            <option value="Lunch">Lunch Only</option>
+            <option value="Dinner">Dinner Only</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Monthly Rate (₹)</label>
+          <input type="number" id="cm-rate" value="2800" step="50">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Status</label>
+        <select id="cm-status">
+          <option value="Active">Active</option>
+          <option value="Paused">Paused</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" onclick="saveCustomer()">Save Customer</button>
+        <button class="btn-cancel" onclick="closeModal('modal-customer')">Cancel</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- JUICE SECTION -->
-<div id="juice-sec" class="sec bg-w" style="padding-top:0">
-  <div style="height:1px;background:var(--border);max-width:1160px;margin:0 auto"></div>
-  <div style="height:80px"></div>
-  <div class="inner">
-    <div class="rv">
-      <div class="sec-tag">Fresh Juices</div>
-      <h2 class="sec-title">Add Fresh Juice to Your Box</h2>
-      <p class="sec-sub">Cold-pressed, no added sugar, no preservatives — served in our premium hygienic glass bottles.</p>
+<!-- ═══════════════════════════════════════
+     EXPENSE MODAL
+════════════════════════════════════════ -->
+<div id="modal-expense" class="modal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="exp-modal-title">Add Entry</h3>
+      <button class="modal-close" onclick="closeModal('modal-expense')">×</button>
     </div>
-
-    <!-- BOTTLE POLICY -->
-    <div class="bottle-policy rv" style="margin-top:24px">
-      <div class="bp-ico">♻️</div>
-      <div class="bp-txt">
-        <strong>Reusable Bottle Policy:</strong> Our juices come in premium hygienic glass bottles. Please <strong>return the bottle</strong> every time you collect your next order — this keeps costs low and the planet clean!<br>
-        <span class="warn">⚠️ Lost or broken bottle charge: ₹20 per bottle.</span> We invest in quality glass for your health and hygiene. Thank you for cooperating!
+    <div class="modal-body">
+      <div class="type-toggle">
+        <button class="type-btn active-exp" id="exp-type-exp" onclick="setExpType('expense')">Expense</button>
+        <button class="type-btn" id="exp-type-inc" onclick="setExpType('income')">Income</button>
       </div>
-    </div>
-
-    <div class="juice-grid" style="margin-top:32px">
-      <!-- JUICE PLAN CARDS -->
-      <div class="juice-plans rl">
-        <div class="jp-card sel" onclick="selJuicePlan(this,'daily',40,'Daily Juice — 200ml','Fresh juice every day, 200ml bottle')">
-          <div class="jp-top">
-            <div class="jp-nm">Daily — 200ml</div>
-            <div class="jp-pr">₹40/day</div>
-          </div>
-          <div class="jp-desc">A fresh 200ml juice every day with your tiffin. No added sugar, no preservatives — just pure fruit.</div>
-          <div class="jp-chips">
-            <span class="jpc">📅 Daily</span>
-            <span class="jpc">200ml bottle</span>
-            <span class="jpc">No sugar</span>
-            <span class="jpc">Fresh pressed</span>
-          </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Amount (₹) *</label>
+          <input type="number" id="em-amount" placeholder="0">
         </div>
-        <div class="jp-card" onclick="selJuicePlan(this,'daily-300',50,'Daily Juice — 300ml','Fresh juice every day, large 300ml bottle')">
-          <div class="jp-top">
-            <div class="jp-nm">Daily — 300ml</div>
-            <div class="jp-pr">₹50/day</div>
-          </div>
-          <div class="jp-desc">A generous 300ml fresh juice daily. Great if you want a fuller serving or workout hydration.</div>
-          <div class="jp-chips">
-            <span class="jpc">📅 Daily</span>
-            <span class="jpc">300ml bottle</span>
-            <span class="jpc">No sugar</span>
-            <span class="jpc">Fresh pressed</span>
-          </div>
-        </div>
-        <div class="jp-card" onclick="selJuicePlan(this,'alternate',40,'Alternate Day Juice — 200ml','Fresh juice every alternate day')">
-          <div class="jp-top">
-            <div class="jp-nm">Alternate Day — 200ml</div>
-            <div class="jp-pr">₹40 / serving</div>
-          </div>
-          <div class="jp-desc">Fresh 200ml juice every alternate day. Great as a lighter option or if you also drink juice at breakfast.</div>
-          <div class="jp-chips">
-            <span class="jpc">📆 Every 2nd Day</span>
-            <span class="jpc">200ml bottle</span>
-            <span class="jpc">No sugar</span>
-          </div>
-        </div>
-        <div class="jp-card" onclick="selJuicePlan(this,'weekend',50,'Weekend Juice — 300ml','Special large fresh juice Saturday & Sunday')">
-          <div class="jp-top">
-            <div class="jp-nm">Weekend Only — 300ml</div>
-            <div class="jp-pr">₹50 / serving</div>
-          </div>
-          <div class="jp-desc">A special large 300ml seasonal fresh juice on Saturday and Sunday only — a weekend wellness treat!</div>
-          <div class="jp-chips">
-            <span class="jpc">📅 Sat & Sun</span>
-            <span class="jpc">300ml bottle</span>
-            <span class="jpc">Seasonal special</span>
-          </div>
+        <div class="form-field">
+          <label>Date *</label>
+          <input type="date" id="em-date">
         </div>
       </div>
-
-      <!-- FLAVOUR PICKER -->
-      <div class="fl-panel rr">
-        <div class="fl-title">Choose Your Flavour</div>
-        <div class="fl-sub">Select your preferred juice. We'll match to what's available that day — seasonal options may vary at launch.</div>
-        <div class="fl-grid" id="flGrid">
-          <div class="fl-item sel" onclick="selFlavour(this,'Orange','🍊','Classic citrus Vitamin C boost')">
-            <span class="fl-emoji">🍊</span>
-            <div class="fl-name">Orange</div>
-            <div class="fl-note">Vitamin C boost</div>
-          </div>
-          <div class="fl-item" onclick="selFlavour(this,'Mosambi','🍋','Sweet lime — refreshing & light')">
-            <span class="fl-emoji">🍋</span>
-            <div class="fl-name">Mosambi</div>
-            <div class="fl-note">Sweet lime</div>
-          </div>
-          <div class="fl-item" onclick="selFlavour(this,'Pomegranate','❤️','Rich in antioxidants & iron')">
-            <span class="fl-emoji">❤️</span>
-            <div class="fl-name">Pomegranate</div>
-            <div class="fl-note">Rich antioxidants</div>
-          </div>
-          <div class="fl-item" onclick="selFlavour(this,'Amla Ginger','🫚','Immunity shot — bold & tangy')">
-            <span class="fl-emoji">🫚</span>
-            <div class="fl-name">Amla Ginger</div>
-            <div class="fl-note">Immunity shot</div>
-          </div>
-          <div class="fl-item" style="grid-column:1/-1;display:flex;align-items:center;gap:12px;text-align:left;padding:12px 14px" onclick="selFlavour(this,'Seasonal','🍹','Best available fresh fruit — changes with the season')">
-            <span class="fl-emoji" style="font-size:22px;margin:0;flex-shrink:0">🍹</span>
-            <div>
-              <div class="fl-name">Seasonal Special</div>
-              <div class="fl-note">Best available that day — mango, watermelon, sugarcane, mixed fruit etc. Varies with season</div>
-            </div>
-          </div>
+      <div class="form-field">
+        <label>Description *</label>
+        <input type="text" id="em-desc" placeholder="e.g. Tomatoes from market">
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Category *</label>
+          <select id="em-cat"></select>
         </div>
-        <div class="juice-sum" id="juiceSummary"></div>
-        <button class="add-juice-btn" onclick="addJuiceToCart()">🧃 Add Juice to My Box</button>
-        <div class="bottle-note">♻️ Return bottle on next pickup · Lost/broken bottle: ₹20 charge</div>
+        <div class="form-field">
+          <label>Payment Mode</label>
+          <select id="em-mode">
+            <option value="cash">Cash</option>
+            <option value="upi">UPI</option>
+            <option value="card">Card</option>
+            <option value="bank">Bank Transfer</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Note (optional)</label>
+        <textarea id="em-note" placeholder="Any extra details..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" onclick="saveExpEntry()">Save Entry</button>
+        <button class="btn-cancel" onclick="closeModal('modal-expense')">Cancel</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ADD-ONS -->
-<section id="addons-sec" class="sec">
-  <div class="inner">
-    <div class="rv">
-      <div class="sec-tag">Extras & Add-Ons</div>
-      <h2 class="sec-title">Make Your Box Even Better</h2>
-      <p class="sec-sub">Pair your tiffin with healthy extras. Add any combination to your daily order.</p>
+<!-- ═══════════════════════════════════════
+     BUDGET MODAL
+════════════════════════════════════════ -->
+<div id="modal-budget" class="modal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>Set Monthly Budgets</h3>
+      <button class="modal-close" onclick="closeModal('modal-budget')">×</button>
     </div>
-    <div class="ao-grid rv">
-      <div class="ao-card" id="ao-bakery">
-        <div class="ao-ico">🥐</div>
-        <div class="ao-name">Bakery Bundle</div>
-        <div class="ao-desc">Fresh baked pau, toast, cookies, khari — baked daily.</div>
-        <div class="ao-price">₹399/mo</div>
-        <button class="ao-add" onclick="addAddon('bakery','Bakery Bundle','🥐',399)">+ Add to Box</button>
-      </div>
-      <div class="ao-card" id="ao-shake">
-        <div class="ao-ico">🥤</div>
-        <div class="ao-name">Protein Shake</div>
-        <div class="ao-desc">Banana, chocolate, or plain milk protein shake — post-workout fuel.</div>
-        <div class="ao-price">₹599/mo</div>
-        <button class="ao-add" onclick="addAddon('shake','Protein Shake','🥤',599)">+ Add to Box</button>
-      </div>
-      <div class="ao-card" id="ao-salad">
-        <div class="ao-ico">🥗</div>
-        <div class="ao-name">Diet Salad Bowl</div>
-        <div class="ao-desc">Large mixed salad — sprouts, corn, cucumber, tomato, lemon dressing.</div>
-        <div class="ao-price">₹349/mo</div>
-        <button class="ao-add" onclick="addAddon('salad','Diet Salad Bowl','🥗',349)">+ Add to Box</button>
-      </div>
-      <div class="ao-card" id="ao-raita">
-        <div class="ao-ico">🫙</div>
-        <div class="ao-name">Raita & Curd</div>
-        <div class="ao-desc">Homemade boondi or cucumber raita / fresh curd — set daily.</div>
-        <div class="ao-price">₹199/mo</div>
-        <button class="ao-add" onclick="addAddon('raita','Raita & Curd','🫙',199)">+ Add to Box</button>
-      </div>
-      <div class="ao-card" id="ao-dessert">
-        <div class="ao-ico">🍮</div>
-        <div class="ao-name">Daily Dessert</div>
-        <div class="ao-desc">Kheer, halwa, gulab jamun, shrikhand — rotating sweet daily.</div>
-        <div class="ao-price">₹299/mo</div>
-        <button class="ao-add" onclick="addAddon('dessert','Daily Dessert','🍮',299)">+ Add to Box</button>
-      </div>
-      <div class="ao-card" id="ao-papad">
-        <div class="ao-ico">🌾</div>
-        <div class="ao-name">Extra Papad Pack</div>
-        <div class="ao-desc">2 extra crispy roasted/fried papad pieces daily with your meal.</div>
-        <div class="ao-price">₹99/mo</div>
-        <button class="ao-add" onclick="addAddon('papad','Extra Papad Pack','🌾',99)">+ Add to Box</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SWEETS & KITCHEN -->
-<div id="sweets-sec" class="sec bg-w">
-  <div class="inner">
-    <div class="rv">
-      <div class="sec-tag">Sweets & Kitchen</div>
-      <h2 class="sec-title">Homemade Sweets & Orders</h2>
-      <p class="sec-sub">Fresh-made sweets available for pickup. Order by noon, collect by 6 PM. Minimum order ₹200.</p>
-    </div>
-    <div class="sw-grid rv">
-      <div class="sw-card"><span class="sw-em">🟡</span><div class="sw-nm">Gulab Jamun</div><div class="sw-pr">₹20/pc</div><div class="sw-mn">Min. 10 pcs</div><button class="sw-btn" onclick="addToCart('gulab','Gulab Jamun (10 pcs)','🟡',200,'order','Min. 10 pcs — order by noon')">Add ₹200</button></div>
-      <div class="sw-card"><span class="sw-em">🟠</span><div class="sw-nm">Motichur Ladoo</div><div class="sw-pr">₹25/pc</div><div class="sw-mn">Min. 8 pcs</div><button class="sw-btn" onclick="addToCart('ladoo','Motichur Ladoo (8 pcs)','🟠',200,'order','Min. 8 pcs')">Add ₹200</button></div>
-      <div class="sw-card"><span class="sw-em">⬜</span><div class="sw-nm">Kaju Katli</div><div class="sw-pr">₹40/pc</div><div class="sw-mn">Box of 12</div><button class="sw-btn" onclick="addToCart('kaju','Kaju Katli (box 12)','⬜',480,'order','Box of 12')">Add ₹480</button></div>
-      <div class="sw-card"><span class="sw-em">🟤</span><div class="sw-nm">Besan Halwa</div><div class="sw-pr">₹150/500g</div><div class="sw-mn">Min. 500g</div><button class="sw-btn" onclick="addToCart('besan','Besan Halwa 500g','🟤',150,'order','500g portion')">Add ₹150</button></div>
-      <div class="sw-card"><span class="sw-em">🥕</span><div class="sw-nm">Gajar Halwa</div><div class="sw-pr">₹180/500g</div><div class="sw-mn">Seasonal</div><button class="sw-btn" onclick="addToCart('gajar','Gajar Halwa 500g','🥕',180,'order','500g seasonal')">Add ₹180</button></div>
-      <div class="sw-card"><span class="sw-em">🍚</span><div class="sw-nm">Kheer</div><div class="sw-pr">₹60/bowl</div><div class="sw-mn">Min. 4 bowls</div><button class="sw-btn" onclick="addToCart('kheer','Kheer (4 bowls)','🍚',240,'order','4 bowls')">Add ₹240</button></div>
-      <div class="sw-card"><span class="sw-em">🟠</span><div class="sw-nm">Shrikhand</div><div class="sw-pr">₹80/cup</div><div class="sw-mn">Daily available</div><button class="sw-btn" onclick="addToCart('shrikhand','Shrikhand','🟠',80,'order','1 cup')">Add ₹80</button></div>
-      <div class="sw-card"><span class="sw-em">🌾</span><div class="sw-nm">Til Chikki</div><div class="sw-pr">₹200/250g</div><div class="sw-mn">250g pack</div><button class="sw-btn" onclick="addToCart('chikki','Til Chikki 250g','🌾',200,'order','250g pack')">Add ₹200</button></div>
-    </div>
-
-    <!-- KITCHEN SERVICES -->
-    <div style="margin-top:60px" class="rv">
-      <div class="sec-tag">Kitchen Services</div>
-      <h2 class="sec-title">More from Our Kitchen</h2>
-    </div>
-    <div class="kc-grid rv">
-      <div class="kc kc-dk">
-        <div class="kc-glow"></div>
-        <span class="kc-ico">🍳</span>
-        <div class="kc-nm">Catering Services</div>
-        <div class="kc-desc">Puja, birthday, small gatherings — we handle the cooking so you enjoy the occasion.</div>
-        <ul class="kc-ul">
-          <li>Up to 50 people capacity</li>
-          <li>Customisable menu</li>
-          <li>Jain / Satvik options</li>
-          <li>Packed or on-site service</li>
-          <li>48 hrs advance booking</li>
-        </ul>
-      </div>
-      <div class="kc kc-sf">
-        <div class="kc-glow"></div>
-        <span class="kc-ico">📦</span>
-        <div class="kc-nm">Festival Gift Boxes</div>
-        <div class="kc-desc">Diwali, Holi, Navratri — curated boxes of homemade sweets & snacks for your loved ones.</div>
-        <ul class="kc-ul">
-          <li>Custom sweet selection</li>
-          <li>Branded packaging</li>
-          <li>Bulk corporate orders</li>
-          <li>Delivery or pickup</li>
-          <li>Pre-order: 3 days prior</li>
-        </ul>
-      </div>
-
-      <div class="kc kc-cr">
-        <span class="kc-ico">🛵</span>
-        <div class="kc-nm">Bulk Tiffin Orders</div>
-        <div class="kc-desc">Office teams, hostels, co-working spaces — we handle large daily orders with ease.</div>
-        <ul class="kc-ul">
-          <li>10+ tiffin bulk pricing</li>
-          <li>Flexible daily schedule</li>
-          <li>Monthly invoice provided</li>
-          <li>Custom menu planning</li>
-          <li>Dedicated order manager</li>
-        </ul>
+    <div class="modal-body">
+      <div id="budget-input-list"></div>
+      <div class="modal-footer">
+        <button class="btn-primary" onclick="saveBudgets()">Save Budgets</button>
+        <button class="btn-cancel" onclick="closeModal('modal-budget')">Cancel</button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- TESTIMONIALS -->
-<section class="sec">
-  <div class="inner">
-    <div class="rv">
-      <div class="sec-tag">Customer Love</div>
-      <h2 class="sec-title">What Our Customers Say</h2>
-    </div>
-    <div class="testi-grid rv">
-      <div class="testi">
-        <div class="t-av">PS</div>
-        <div class="t-stars">★★★★★</div>
-        <div class="t-txt">"As a hostel student, the ₹80 meal is genuinely life-changing. Same great food as everyone else, just a better price. Feels like mom's cooking every day!"</div>
-        <div class="t-name">Priya Sharma</div>
-        <div class="t-role">Engineering Student, Pune</div>
-      </div>
-      <div class="testi">
-        <div class="t-av">RP</div>
-        <div class="t-stars">★★★★★</div>
-        <div class="t-txt">"The office tiffin at ₹120 with buttermilk is perfect — fresh chapati, bhaji, dal, rice. My whole team has subscribed now. Great value for a home-cooked meal!"</div>
-        <div class="t-name">Rajesh Patel</div>
-        <div class="t-role">Software Engineer, Baner</div>
-      </div>
-      <div class="testi">
-        <div class="t-av">AS</div>
-        <div class="t-stars">★★★★★</div>
-        <div class="t-txt">"The gym box is exactly what I needed — eggs, paneer roll, salad, sprouts and a fresh juice. No junk, clean macros. I recommend it to all my gym friends!"</div>
-        <div class="t-name">Amrita Singh</div>
-        <div class="t-role">Fitness Coach, Kothrud</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<div class="cta-wrap rv" style="max-width:none;margin-left:80px;margin-right:80px;margin-bottom:72px">
-  <div class="cta-c1"></div><div class="cta-c2"></div>
-  <div class="sec-tag" style="justify-content:center;color:var(--gold-l)">Get Started Today</div>
-  <h2 class="cta-h">Ready to Eat Better?</h2>
-  <p class="cta-sub">Join hundreds of happy customers enjoying fresh, homestyle Indian meals every single day.</p>
-  <div class="cta-btns">
-    <button class="btn-w" onclick="toggleCart()">🍱 View My Meal Box</button>
-    <a href="tel:+919999999999" class="btn-gh">📞 +91 99999 99999</a>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="ft-grid">
-    <div>
-      <div class="ft-brand">Tefin Services</div>
-      <div class="ft-desc">Fresh homestyle Indian meals for students, professionals, and fitness lovers across Pune. Pickup daily — delivery coming soon!</div>
-      <div class="ft-links">
-        <a href="tel:+919999999999">📞 +91 99999 99999</a>
-        <a href="mailto:hello@tefinservices.in">✉️ hello@tefinservices.in</a>
-        <a href="#">📍 Pickup Kitchen, Pune</a>
-        <a href="#">⏰ Timeslots: 12–1 PM · 7–8 PM</a>
-      </div>
-    </div>
-    <div class="ft-col">
-      <h4>Meal Plans</h4>
-      <ul>
-        <li>Office Tiffin — ₹120</li>
-        <li>Student Tiffin — ₹80</li>
-        <li>Regular Tiffin — ₹120</li>
-        <li>Gym Box — ₹180</li>
-      </ul>
-    </div>
-    <div class="ft-col">
-      <h4>Add-Ons</h4>
-      <ul>
-        <li>Fresh Juices (₹40–50)</li>
-        <li>Bakery Bundle</li>
-        <li>Protein Shakes</li>
-        <li>Diet Salad Bowl</li>
-        <li>Daily Dessert</li>
-      </ul>
-    </div>
-    <div class="ft-col">
-      <h4>Kitchen</h4>
-      <ul>
-        <li>Homemade Sweets</li>
-        <li>Catering Services</li>
-        <li>Festival Gift Boxes</li>
-
-        <li>Bulk Orders</li>
-      </ul>
-    </div>
-  </div>
-  <div class="ft-btm">
-    <span>© 2025 Tefin Services · Made with ❤️ in Pune</span>
-    <div class="ft-bgs">
-      <span class="ft-bg">No Preservatives</span>
-      <span class="ft-bg">♻️ Eco Bottles</span>
-      <span class="ft-bg">100% Veg Kitchen</span>
-    </div>
-  </div>
-</footer>
-
-<!-- CART DRAWER -->
-<div class="c-overlay" id="cOverlay" onclick="toggleCart()"></div>
-<div class="c-drawer" id="cDrawer">
-  <div class="c-hdr">
-    <div class="c-hdr-l">
-      <span class="c-hdr-ico">🍱</span>
-      <div>
-        <div class="c-hdr-title">My Meal Box</div>
-        <div class="c-hdr-sub">Your customised tiffin plan</div>
-      </div>
-    </div>
-    <button class="c-close" onclick="toggleCart()">✕</button>
-  </div>
-  <div class="c-body" id="cBody">
-    <div class="c-empty">
-      <span class="c-empty-ico">🍱</span>
-      <div class="c-empty-t">Your meal box is empty!</div>
-      <div class="c-empty-s">Add a meal plan and extras to get started.</div>
-    </div>
-  </div>
-  <div class="c-ftr" id="cFtr" style="display:none">
-    <div id="cBreakdown"></div>
-    <button class="chk-btn" onclick="placeOrder()">✅ Confirm & Place Order</button>
-    <div class="cf-note">📍 Pickup only · Payment on pickup · Call to confirm timeslot</div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast"><span id="t-ico">✅</span><span id="t-msg">Added!</span></div>
 
 <script>
-// COUNTDOWN
-function tick(){
-  const end=new Date('2025-06-30T23:59:59'),now=new Date(),d=end-now;
-  if(d<=0){document.getElementById('cd-bar').style.display='none';return}
-  const dd=Math.floor(d/86400000),hh=Math.floor((d%86400000)/3600000),mm=Math.floor((d%3600000)/60000),ss=Math.floor((d%60000)/1000);
-  document.getElementById('cd-d').textContent=String(dd).padStart(2,'0');
-  document.getElementById('cd-h').textContent=String(hh).padStart(2,'0');
-  document.getElementById('cd-m').textContent=String(mm).padStart(2,'0');
-  document.getElementById('cd-s').textContent=String(ss).padStart(2,'0');
-}
-tick();setInterval(tick,1000);
+// ════════════════════════════════════════════
+//  SHARED STATE
+// ════════════════════════════════════════════
+const todayStr = new Date().toISOString().split('T')[0];
 
-// HERO TIFFIN
-let tOpen=false;
-function heroOpen(){
-  tOpen=!tOpen;
-  const lid=document.getElementById('hl'),meal=document.getElementById('hm'),hint=document.getElementById('tapHint');
-  if(tOpen){
-    lid.style.transform='translateY(-108px) rotate(-11deg)';
-    meal.style.opacity='1';
-    hint.textContent='👆 Tap to close your tiffin';
-  } else {
-    lid.style.transform='';
-    meal.style.opacity='0';
-    hint.textContent='👆 Tap to open your tiffin!';
+// ── Customers ──────────────────────────────
+let customers = [];
+let custGroupByAddr = false;
+let custEditId = null;
+
+function loadCustomers(){
+  const s = localStorage.getItem('tiffin_pro_customers');
+  if(s){ try{ customers = JSON.parse(s); }catch(e){} }
+  if(!customers || !customers.length){
+    const today = getTodayFmt();
+    const yest  = getYestFmt();
+    customers = [
+      {id:today,     name:'Amit Sharma',  phone:'9988770011', address:'Tech Park, Baner, Pune',    plan:'Daily',  monthlyRate:3200, status:'Active'},
+      {id:today+'1', name:'Priya Desai',  phone:'9823456789', address:'Tech Park, Baner, Pune',    plan:'Lunch',  monthlyRate:1800, status:'Active'},
+      {id:yest,      name:'Rajiv Mehta',  phone:'9988770033', address:'NCL Colony, Pashan, Pune',  plan:'Daily',  monthlyRate:3500, status:'Active'},
+      {id:yest+'1',  name:'Sunita Patil', phone:'9988770044', address:'Aundh, Pune',               plan:'Dinner', monthlyRate:1900, status:'Active'},
+      {id:yest+'2',  name:'Vijay More',   phone:'9654321098', address:'Baner, Pune',               plan:'Daily',  monthlyRate:3200, status:'Active'},
+      {id:yest+'3',  name:'Meera Nair',   phone:'9543210987', address:'NCL Colony, Pashan, Pune',  plan:'Lunch',  monthlyRate:1800, status:'Paused'},
+    ];
+    saveCustomers();
   }
 }
-
-// PLANS
-function switchPlan(id,btn){
-  document.querySelectorAll('.pnl').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('pp-'+id).classList.add('active');
-  btn.classList.add('active');
-  document.getElementById('plans-sec').scrollIntoView({behavior:'smooth',block:'start'});
+function saveCustomers(){
+  localStorage.setItem('tiffin_pro_customers', JSON.stringify(customers));
 }
-
-// JUICE
-let juicePlan={id:'daily',price:40,name:'Daily Juice — 200ml',desc:'200ml fresh juice every day'};
-let juiceFlavour='Orange';
-
-function selJuicePlan(el,id,price,name,desc){
-  document.querySelectorAll('.jp-card').forEach(c=>c.classList.remove('sel'));
-  el.classList.add('sel');
-  juicePlan={id,price,name,desc};
-  updateJuiceSum();
+function getTodayFmt(){
+  const d=new Date();
+  return String(d.getDate()).padStart(2,'0')+String(d.getMonth()+1).padStart(2,'0')+d.getFullYear();
 }
-function selFlavour(el,name){
-  document.querySelectorAll('.fl-item').forEach(f=>f.classList.remove('sel'));
-  el.classList.add('sel');
-  juiceFlavour=name;
-  updateJuiceSum();
+function getYestFmt(){
+  const d=new Date(); d.setDate(d.getDate()-1);
+  return String(d.getDate()).padStart(2,'0')+String(d.getMonth()+1).padStart(2,'0')+d.getFullYear();
 }
-function updateJuiceSum(){
-  const el=document.getElementById('juiceSummary');
-  el.style.display='block';
-  el.innerHTML='<strong>Your selection:</strong> '+juicePlan.name+' · Flavour: <strong>'+juiceFlavour+'</strong> · <strong style="color:var(--saffron)">₹'+juicePlan.price+' per serving</strong>';
-}
-function addJuiceToCart(){
-  addToCart('juice-'+juicePlan.id, juicePlan.name+' ('+juiceFlavour+')','🧃',juicePlan.price,'serving',juicePlan.desc+' · ♻️ Return bottle each time · Lost bottle: ₹20 charge');
-}
-
-// CART
-let cart=[];
-function addToCart(id,name,icon,price,period,detail){
-  const ex=cart.find(i=>i.id===id);
-  if(ex){ex.qty=(ex.qty||1)+1;showToast(icon+' Qty updated!');}
-  else{cart.push({id,name,icon,price,period,detail,qty:1});showToast(icon+' '+name+' added to your box!');}
-  renderCart();updateBadge();
-  const b=document.getElementById('cart-badge');
-  b.classList.add('bump');
-  setTimeout(()=>b.classList.remove('bump'),280);
-  setTimeout(()=>{
-    document.getElementById('cDrawer').classList.add('open');
-    document.getElementById('cOverlay').classList.add('open');
-  },380);
-}
-function addAddon(id,name,icon,price){
-  document.getElementById('ao-'+id)?.classList.add('added');
-  addToCart('ao-'+id,name,icon,price,'month','Monthly add-on to your tiffin box');
-}
-function remFromCart(id){
-  cart=cart.filter(i=>i.id!==id);
-  const aoId=id.replace('ao-','');
-  document.getElementById('ao-'+aoId)?.classList.remove('added');
-  renderCart();updateBadge();
-}
-function chgQty(id,delta){
-  const it=cart.find(i=>i.id===id);
-  if(!it)return;
-  it.qty=(it.qty||1)+delta;
-  if(it.qty<=0){remFromCart(id);return;}
-  renderCart();updateBadge();
-}
-function updateBadge(){
-  const n=cart.reduce((a,i)=>a+(i.qty||1),0);
-  const b=document.getElementById('cart-badge'),l=document.getElementById('cart-lbl');
-  b.textContent=n;b.style.display=n>0?'flex':'none';
-  l.textContent=n>0?'My Box ('+n+')':'My Box';
-}
-function renderCart(){
-  const body=document.getElementById('cBody'),ftr=document.getElementById('cFtr');
-  if(!cart.length){
-    body.innerHTML='<div class="c-empty"><span class="c-empty-ico">🍱</span><div class="c-empty-t">Your meal box is empty!</div><div class="c-empty-s">Add a meal plan and extras to get started.</div></div>';
-    ftr.style.display='none';return;
-  }
-  let html='';
-  cart.forEach(it=>{
-    const q=it.qty||1,sub=it.price*q;
-    html+=`<div class="c-item">
-      <div class="ci-top">
-        <div class="ci-left">
-          <span class="ci-ico">${it.icon}</span>
-          <div>
-            <div class="ci-nm">${it.name}</div>
-            <div class="ci-dt">${it.detail}</div>
-            <div class="ci-dt" style="color:var(--muted);margin-top:3px">₹${it.price.toLocaleString()} / ${it.period}</div>
-          </div>
-        </div>
-        <div class="ci-pr">₹${sub.toLocaleString()}</div>
-      </div>
-      <div class="ci-btm">
-        <div class="qty">
-          <button class="q-btn" onclick="chgQty('${it.id}',-1)">−</button>
-          <span class="q-val">${q}</span>
-          <button class="q-btn" onclick="chgQty('${it.id}',1)">+</button>
-        </div>
-        <span class="ci-sub">Subtotal: ₹${sub.toLocaleString()}</span>
-        <button class="ci-rem" onclick="remFromCart('${it.id}')" title="Remove">🗑️</button>
-      </div>
-    </div>`;
+function genCustId(){
+  const base=getTodayFmt();
+  const same=customers.filter(c=>c.id===base||c.id.startsWith(base));
+  if(!same.length) return base;
+  let max=0;
+  same.forEach(c=>{
+    if(c.id===base){max=Math.max(max,0);}
+    else{ const s=c.id.slice(base.length); if(/^\d+$/.test(s)) max=Math.max(max,parseInt(s)); }
   });
-  body.innerHTML=html;
-  renderFtr();ftr.style.display='block';
-}
-function renderFtr(){
-  const sub=cart.reduce((a,i)=>a+i.price*(i.qty||1),0);
-  const hasStu=cart.some(i=>i.id==='student-80');
-  const disc=hasStu?40*cart.find(i=>i.id==='student-80').qty:0;
-  const total=sub;
-  let html=`<div class="cf-row"><span class="cf-lbl">Subtotal</span><span class="cf-val">₹${sub.toLocaleString()}</span></div>`;
-  if(disc>0) html+=`<div class="cf-row cf-disc"><span>🎓 Student saving</span><span class="cf-val g">vs regular rate</span></div>`;
-  html+=`<div class="cf-row"><span class="cf-lbl">Delivery</span><span class="cf-val g">Free (Pickup)</span></div>`;
-  html+=`<div class="cf-total"><span>Total</span><span>₹${total.toLocaleString()}</span></div>`;
-  document.getElementById('cBreakdown').innerHTML=html;
-}
-function toggleCart(){
-  document.getElementById('cDrawer').classList.toggle('open');
-  document.getElementById('cOverlay').classList.toggle('open');
-}
-function placeOrder(){
-  if(!cart.length)return;
-  showToast('🎉 Order confirmed! Call us to schedule pickup.');
-  setTimeout(()=>{
-    cart=[];renderCart();updateBadge();
-    document.getElementById('cDrawer').classList.remove('open');
-    document.getElementById('cOverlay').classList.remove('open');
-    document.querySelectorAll('.ao-card').forEach(c=>c.classList.remove('added'));
-  },500);
+  return max===0?base+'1':base+(max+1);
 }
 
-// TOAST
-let tTimer=null;
+// ── Delivery ───────────────────────────────
+let deliveryRecords = {};
+let delGroupByAddr = false;
+
+function loadDelivery(){
+  const s=localStorage.getItem('tiffin_delivery_v1');
+  if(s){ try{ deliveryRecords=JSON.parse(s); }catch(e){ deliveryRecords={}; } }
+  const today=getTodayDate();
+  customers.filter(c=>c.status==='Active').forEach(c=>{
+    for(let i=0;i<30;i++){
+      const d=new Date(today); d.setDate(today.getDate()-i);
+      const k=c.id+'_'+fmtKey(d);
+      if(!deliveryRecords[k]) deliveryRecords[k]='pending';
+    }
+  });
+  saveDelivery();
+}
+function saveDelivery(){ localStorage.setItem('tiffin_delivery_v1',JSON.stringify(deliveryRecords)); }
+function getDelStatus(id,date){ return deliveryRecords[id+'_'+fmtKey(date)]||'pending'; }
+function setDelStatus(id,status,name){
+  const key=id+'_'+fmtKey(getTodayDate());
+  const cur=deliveryRecords[key]||'pending';
+  if(status==='delivered'){
+    if(!confirm(`Mark ${name} as DELIVERED today?`)) return;
+  }
+  if(status==='sent'&&cur==='delivered'){ showToast(name+' already delivered today'); return; }
+  deliveryRecords[key]=status;
+  saveDelivery(); renderDelivery(); renderHeatmap(); renderOverview();
+  showToast(name+' marked as '+status);
+}
+function getTodayDate(){ const d=new Date(); d.setHours(0,0,0,0); return d; }
+function fmtKey(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function fmtDisplay(d){ return d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'}); }
+
+// ── Billing ────────────────────────────────
+let billingRecords = {};
+function getMonthKey(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); }
+function loadBilling(){
+  const s=localStorage.getItem('tiffin_billing_v1');
+  if(s){ try{ billingRecords=JSON.parse(s); }catch(e){ billingRecords={}; } }
+  const m=getMonthKey();
+  customers.filter(c=>c.status==='Active').forEach(c=>{
+    const k=c.id+'_'+m; if(!billingRecords[k]) billingRecords[k]='pending';
+  });
+  saveBilling();
+}
+function saveBilling(){ localStorage.setItem('tiffin_billing_v1',JSON.stringify(billingRecords)); }
+function getBillStatus(id){ return billingRecords[id+'_'+getMonthKey()]||'pending'; }
+function setBillStatus(id,status,name){
+  if(status==='paid'&&!confirm(`Mark ${name} as PAID for this month?`)) return;
+  billingRecords[id+'_'+getMonthKey()]=status;
+  saveBilling(); renderBilling(); renderBillStats(); renderOverview();
+  showToast(name+' marked as '+status);
+}
+function markAllPaid(){
+  const active=customers.filter(c=>c.status==='Active');
+  if(!confirm(`Mark ALL ${active.length} customers as PAID?`)) return;
+  active.forEach(c=>{ billingRecords[c.id+'_'+getMonthKey()]='paid'; });
+  saveBilling(); renderBilling(); renderBillStats(); renderOverview();
+  showToast('All customers marked as paid');
+}
+
+// ── Expenses ───────────────────────────────
+const EXP_CATS = [
+  {id:'vegetables', name:'Vegetables',      color:'#2c7a5e', exp:true },
+  {id:'grocery',    name:'Grocery',          color:'#1e4a6e', exp:true },
+  {id:'transport',  name:'Transport',        color:'#6d28d9', exp:true },
+  {id:'daily',      name:'Daily Expenses',   color:'#b45309', exp:true },
+  {id:'equipment',  name:'Equipment/Repair', color:'#991b1b', exp:true },
+  {id:'gas',        name:'Gas & Fuel',       color:'#92400e', exp:true },
+  {id:'packaging',  name:'Packaging',        color:'#0e7490', exp:true },
+  {id:'salary',     name:'Salary/Labour',    color:'#374151', exp:true },
+  {id:'other_exp',  name:'Other Expense',    color:'#5b6e8c', exp:true },
+  {id:'tiffin',     name:'Tiffin Sales',     color:'#2c7a5e', exp:false},
+  {id:'subs',       name:'Subscriptions',    color:'#1e4a6e', exp:false},
+  {id:'other_inc',  name:'Other Income',     color:'#6d28d9', exp:false},
+];
+const ECM={};EXP_CATS.forEach(c=>ECM[c.id]=c);
+
+let expEntries = [];
+let expNid = 20;
+let expCurMonth = '2026-06';
+let expEntryType = 'expense';
+let expEditId = null;
+let expBudgets = {vegetables:8000,grocery:10000,transport:3000,daily:2000,equipment:4000,gas:3500,packaging:2500,salary:15000};
+
+function loadExpenses(){
+  const s=localStorage.getItem('tiffin_expenses_v1');
+  if(s){ try{ const p=JSON.parse(s); expEntries=p.entries||[]; expBudgets=p.budgets||expBudgets; expNid=p.nid||20; }catch(e){} }
+  if(!expEntries.length){
+    expEntries=[
+      {id:1,  type:'expense',amount:840,  date:'2026-06-01',desc:'Tomatoes, onions, green veg',      cat:'vegetables',mode:'cash'},
+      {id:2,  type:'expense',amount:1200, date:'2026-06-01',desc:'Atta, dal, rice, oil',             cat:'grocery',   mode:'upi'},
+      {id:3,  type:'expense',amount:250,  date:'2026-06-02',desc:'Auto fare to market',              cat:'transport', mode:'cash'},
+      {id:4,  type:'expense',amount:500,  date:'2026-06-02',desc:'Disposable containers (100)',      cat:'packaging', mode:'upi'},
+      {id:5,  type:'expense',amount:680,  date:'2026-06-03',desc:'Spinach, carrot, methi',          cat:'vegetables',mode:'cash'},
+      {id:6,  type:'expense',amount:950,  date:'2026-06-03',desc:'Spices and masala restock',        cat:'grocery',   mode:'upi'},
+      {id:7,  type:'expense',amount:1800, date:'2026-06-04',desc:'LPG cylinder refill x2',          cat:'gas',       mode:'cash'},
+      {id:8,  type:'expense',amount:400,  date:'2026-06-04',desc:'Fuel for delivery bike',           cat:'transport', mode:'upi'},
+      {id:9,  type:'expense',amount:3200, date:'2026-06-05',desc:'Part-time cook labour',            cat:'salary',    mode:'bank'},
+      {id:10, type:'expense',amount:1500, date:'2026-06-05',desc:'Pressure cooker repair',           cat:'equipment', mode:'cash'},
+      {id:11, type:'expense',amount:620,  date:'2026-06-05',desc:'Cleaning supplies, misc',          cat:'daily',     mode:'cash'},
+      {id:12, type:'expense',amount:890,  date:'2026-06-06',desc:'Cauliflower, beans, potato',       cat:'vegetables',mode:'cash'},
+      {id:13, type:'income', amount:9000, date:'2026-06-01',desc:'Monthly subscription – 5 customers',cat:'tiffin',  mode:'upi'},
+      {id:14, type:'income', amount:5400, date:'2026-06-03',desc:'Monthly subscription – 3 customers',cat:'tiffin',  mode:'upi'},
+      {id:15, type:'income', amount:1800, date:'2026-06-05',desc:'Daily tiffin orders',              cat:'tiffin',    mode:'cash'},
+    ];
+    expNid=16;
+  }
+}
+function saveExpenses(){ localStorage.setItem('tiffin_expenses_v1',JSON.stringify({entries:expEntries,budgets:expBudgets,nid:expNid})); }
+function monthExp(){ return expEntries.filter(e=>e.date.startsWith(expCurMonth)); }
+function totalType(t){ return monthExp().filter(e=>e.type===t).reduce((s,e)=>s+e.amount,0); }
+function catTotal(id){ return monthExp().filter(e=>e.cat===id&&e.type==='expense').reduce((s,e)=>s+e.amount,0); }
+function fmt(n){ return '₹'+Math.round(n).toLocaleString('en-IN'); }
+function fmtDate(s){ const d=new Date(s+'T00:00:00'); return d.getDate()+' '+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()]; }
+function daysInMonth(){ const[y,m]=expCurMonth.split('-').map(Number); return new Date(y,m,0).getDate(); }
+function esc(s){ return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+// ════════════════════════════════════════════
+//  PAGE NAVIGATION
+// ════════════════════════════════════════════
+function showPage(name, btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  if(btn) btn.classList.add('active');
+  renderPage(name);
+}
+
+function renderPage(name){
+  if(name==='overview')   renderOverview();
+  if(name==='customers')  renderCustomers();
+  if(name==='delivery')   { renderDelivery(); renderHeatmap(); }
+  if(name==='billing')    { renderBilling(); renderBillStats(); }
+  if(name==='expenses')   renderAllExp();
+}
+
+// ════════════════════════════════════════════
+//  OVERVIEW
+// ════════════════════════════════════════════
+function renderOverview(){
+  document.getElementById('ov-date').textContent = fmtDisplay(getTodayDate());
+
+  const active = customers.filter(c=>c.status==='Active');
+  const today  = getTodayDate();
+  const todayDel = active.filter(c=>getDelStatus(c.id,today)==='delivered').length;
+  const billPend = active.filter(c=>getBillStatus(c.id)==='pending').length;
+  const billAmt  = active.filter(c=>getBillStatus(c.id)==='pending').reduce((s,c)=>s+c.monthlyRate,0);
+  const inc = totalType('income'), exp = totalType('expense');
+
+  document.getElementById('ov-stats').innerHTML=`
+    <div class="stat-card"><div class="s-label">Active Customers</div><div class="s-value">${active.length}</div></div>
+    <div class="stat-card"><div class="s-label">Delivered Today</div><div class="s-value green">${todayDel}</div><div class="s-sub">of ${active.length}</div></div>
+    <div class="stat-card"><div class="s-label">Billing Pending</div><div class="s-value red">${billPend}</div><div class="s-sub">${fmt(billAmt)}</div></div>
+    <div class="stat-card"><div class="s-label">This Month Savings</div><div class="s-value" style="color:${inc-exp>=0?'#2c7a5e':'#b45309'}">${fmt(inc-exp)}</div></div>`;
+
+  // Today's deliveries
+  let dh='';
+  active.slice(0,6).forEach(c=>{
+    const st=getDelStatus(c.id,today);
+    const bc=st==='delivered'?'badge-delivered':st==='sent'?'badge-sent':'badge-pending';
+    dh+=`<div class="ov-list-row"><div><div class="ov-list-name">${esc(c.name)}</div><div class="ov-list-sub">${esc(c.address)}</div></div><span class="badge ${bc}">${st}</span></div>`;
+  });
+  document.getElementById('ov-deliveries').innerHTML=dh||'<div class="empty">No active customers</div>';
+
+  // Pending payments
+  let ph='';
+  active.filter(c=>getBillStatus(c.id)==='pending').slice(0,5).forEach(c=>{
+    ph+=`<div class="ov-list-row"><div class="ov-list-name">${esc(c.name)}</div><span style="font-weight:700;color:#b45309">${fmt(c.monthlyRate)}</span></div>`;
+  });
+  document.getElementById('ov-payments').innerHTML=ph||'<div class="empty" style="padding:20px">All payments collected!</div>';
+
+  // Tickets placeholder
+  document.getElementById('ov-tickets').innerHTML=`<div class="empty" style="padding:20px">Ticket module coming soon</div>`;
+
+  // Finance
+  const maxV=Math.max(inc,exp,1);
+  document.getElementById('ov-finance').innerHTML=`
+    <div class="cmp-item"><div class="cmp-label"><span style="color:#2c7a5e">Income</span><span style="color:#2c7a5e">${fmt(inc)}</span></div><div class="cmp-bar"><div class="cmp-fill" style="width:${(inc/maxV)*100}%;background:#2c7a5e"></div></div></div>
+    <div class="cmp-item"><div class="cmp-label"><span style="color:#b45309">Expense</span><span style="color:#b45309">${fmt(exp)}</span></div><div class="cmp-bar"><div class="cmp-fill" style="width:${(exp/maxV)*100}%;background:#b45309"></div></div></div>
+    <div style="margin-top:12px;padding:10px 14px;background:${inc-exp>=0?'#e8f3ef':'#fef3c7'};border-radius:12px;display:flex;justify-content:space-between">
+      <span style="font-size:0.78rem;font-weight:600;color:${inc-exp>=0?'#2c7a5e':'#b45309'}">${inc-exp>=0?'Savings':'Loss'}</span>
+      <span style="font-weight:700;color:${inc-exp>=0?'#1e4a6e':'#991b1b'}">${fmt(Math.abs(inc-exp))}</span>
+    </div>`;
+}
+
+// ════════════════════════════════════════════
+//  CUSTOMERS
+// ════════════════════════════════════════════
+function renderCustomers(){
+  const active=customers.filter(c=>c.status==='Active');
+  document.getElementById('cust-count-pill').textContent=active.length+' active';
+  const search=(document.getElementById('cust-search').value||'').toLowerCase();
+  const plan=document.getElementById('cust-plan-filter').value;
+  const status=document.getElementById('cust-status-filter').value;
+  let list=customers.filter(c=>{
+    const m=c.name.toLowerCase().includes(search)||c.phone.includes(search)||c.address.toLowerCase().includes(search)||c.id.includes(search);
+    return m&&(plan==='all'||c.plan===plan)&&(status==='all'||c.status===status);
+  });
+
+  if(!custGroupByAddr){
+    document.getElementById('cust-tbody').innerHTML=list.map(c=>custRow(c)).join('')||`<tr><td colspan="8" class="empty-td">No customers found</td></tr>`;
+  } else {
+    const grps=new Map();
+    list.forEach(c=>{ const a=c.address||'No Address'; grps.set(a,(grps.get(a)||[]).concat(c)); });
+    let h='';
+    grps.forEach((cs,addr)=>{
+      const gk='g_'+addr.replace(/\W/g,'_');
+      h+=`<tr class="group-row" onclick="toggleGroup('${gk}')"><td colspan="8">${esc(addr)} · (${cs.length} customers) <span style="float:right">▼</span></td></tr>`;
+      cs.forEach(c=>{ h+=`<tr class="child-row grp-${gk}">${custRowCells(c)}</tr>`; });
+    });
+    document.getElementById('cust-tbody').innerHTML=h||`<tr><td colspan="8" class="empty-td">No customers</td></tr>`;
+  }
+  bindCustBtns();
+}
+
+function custRow(c){ return `<tr>${custRowCells(c)}</tr>`; }
+function custRowCells(c){
+  return `<td><span class="id-badge">${esc(c.id)}</span></td>
+    <td><strong>${esc(c.name)}</strong><br><span style="font-size:0.65rem;color:#5b6e8c">${esc(c.phone)}</span></td>
+    <td style="font-size:0.78rem">${esc(c.address)||'—'}</td>
+    <td><span class="plan-tag">${c.plan}</span></td>
+    <td style="font-weight:600">${fmt(c.monthlyRate)}</td>
+    <td><span class="badge ${c.status==='Active'?'badge-active':'badge-paused'}">${c.status}</span></td>
+    <td><div class="action-btns">
+      <button class="btn-sm btn-edit" data-cid="${esc(c.id)}" onclick="editCust('${esc(c.id)}')">Edit</button>
+      <button class="btn-sm btn-del" onclick="delCust('${esc(c.id)}')">Delete</button>
+    </div></td>`;
+}
+function bindCustBtns(){}
+
+function toggleCustGroup(){
+  custGroupByAddr=!custGroupByAddr;
+  document.getElementById('cust-group-btn').classList.toggle('active',custGroupByAddr);
+  renderCustomers();
+}
+function toggleGroup(gk){
+  const rows=document.querySelectorAll('.grp-'+gk);
+  const hide=rows[0]?.style.display!=='none';
+  rows.forEach(r=>r.style.display=hide?'none':'');
+}
+
+function openCustModal(id=null){
+  custEditId=id;
+  const c=id?customers.find(x=>x.id===id):null;
+  document.getElementById('cust-modal-title').textContent=id?'Edit Customer':'Add Customer';
+  document.getElementById('cm-name').value   =c?c.name:'';
+  document.getElementById('cm-phone').value  =c?c.phone:'';
+  document.getElementById('cm-address').value=c?c.address:'';
+  document.getElementById('cm-plan').value   =c?c.plan:'Daily';
+  document.getElementById('cm-rate').value   =c?c.monthlyRate:2800;
+  document.getElementById('cm-status').value =c?c.status:'Active';
+  openModal('modal-customer');
+}
+function editCust(id){ openCustModal(id); }
+function delCust(id){
+  const c=customers.find(x=>x.id===id);
+  if(c&&confirm(`Delete "${c.name}"?`)){
+    customers=customers.filter(x=>x.id!==id);
+    saveCustomers(); renderCustomers(); renderOverview();
+    showToast(c.name+' deleted');
+  }
+}
+function saveCustomer(){
+  const name=document.getElementById('cm-name').value.trim();
+  const phone=document.getElementById('cm-phone').value.trim();
+  if(!name||!phone){ showToast('Name and phone required'); return; }
+  const rate=parseFloat(document.getElementById('cm-rate').value);
+  if(!rate||rate<=0){ showToast('Valid rate required'); return; }
+  if(custEditId){
+    const i=customers.findIndex(c=>c.id===custEditId);
+    if(i>=0) customers[i]={...customers[i],name,phone,address:document.getElementById('cm-address').value.trim(),plan:document.getElementById('cm-plan').value,monthlyRate:rate,status:document.getElementById('cm-status').value};
+  } else {
+    customers.push({id:genCustId(),name,phone,address:document.getElementById('cm-address').value.trim(),plan:document.getElementById('cm-plan').value,monthlyRate:rate,status:document.getElementById('cm-status').value});
+  }
+  saveCustomers(); loadDelivery(); loadBilling();
+  closeModal('modal-customer'); renderCustomers(); renderOverview();
+  showToast(custEditId?'Customer updated':'Customer added');
+}
+
+// ════════════════════════════════════════════
+//  DELIVERY
+// ════════════════════════════════════════════
+function renderDelivery(){
+  document.getElementById('del-date-pill').textContent=fmtDisplay(getTodayDate());
+  const today=getTodayDate();
+  const active=customers.filter(c=>c.status==='Active');
+  const del=active.filter(c=>getDelStatus(c.id,today)==='delivered').length;
+  const sent=active.filter(c=>getDelStatus(c.id,today)==='sent').length;
+  const pend=active.filter(c=>getDelStatus(c.id,today)==='pending').length;
+  document.getElementById('del-stats').innerHTML=`
+    <div class="stat-card"><div class="s-label">Pending</div><div class="s-value red">${pend}</div></div>
+    <div class="stat-card"><div class="s-label">Sent</div><div class="s-value" style="color:#065f46">${sent}</div></div>
+    <div class="stat-card"><div class="s-label">Delivered</div><div class="s-value green">${del}</div></div>
+    <div class="stat-card"><div class="s-label">Total Active</div><div class="s-value">${active.length}</div></div>`;
+
+  const search=(document.getElementById('del-search').value||'').toLowerCase();
+  const plan=document.getElementById('del-plan-filter').value;
+  let list=active.filter(c=>(c.name.toLowerCase().includes(search)||c.address.toLowerCase().includes(search))&&(plan==='all'||c.plan===plan));
+
+  if(!delGroupByAddr){
+    document.getElementById('del-tbody').innerHTML=list.map(c=>{
+      const st=getDelStatus(c.id,today);
+      return `<tr>
+        <td><span class="id-badge">${esc(c.id)}</span></td>
+        <td><strong>${esc(c.name)}</strong><br><span style="font-size:0.65rem;color:#5b6e8c">${esc(c.address)}</span></td>
+        <td style="font-size:0.78rem">${esc(c.address)||'—'}</td>
+        <td><span class="plan-tag">${c.plan}</span></td>
+        <td><span class="badge ${st==='delivered'?'badge-delivered':st==='sent'?'badge-sent':'badge-pending'}">${st.toUpperCase()}</span></td>
+        <td><div class="action-btns">
+          <button class="btn-sm btn-yellow" onclick="setDelStatus('${c.id}','pending','${esc(c.name)}')">Pending</button>
+          <button class="btn-sm btn-teal"   onclick="setDelStatus('${c.id}','sent','${esc(c.name)}')">Sent</button>
+          <button class="btn-sm btn-dgreen" onclick="setDelStatus('${c.id}','delivered','${esc(c.name)}')">Delivered</button>
+        </div></td>
+      </tr>`;
+    }).join('')||`<tr><td colspan="6" class="empty-td">No active customers</td></tr>`;
+  } else {
+    const grps=new Map();
+    list.forEach(c=>{ const a=c.address||'No Address'; grps.set(a,(grps.get(a)||[]).concat(c)); });
+    let h='';
+    grps.forEach((cs,addr)=>{
+      const gk='dg_'+addr.replace(/\W/g,'_');
+      h+=`<tr class="group-row" onclick="toggleGroup('${gk}')"><td colspan="6">${esc(addr)} · (${cs.length}) <span style="float:right">▼</span></td></tr>`;
+      cs.forEach(c=>{
+        const st=getDelStatus(c.id,today);
+        h+=`<tr class="child-row grp-${gk}">
+          <td><span class="id-badge">${esc(c.id)}</span></td>
+          <td><strong>${esc(c.name)}</strong></td>
+          <td>${esc(c.address)}</td>
+          <td><span class="plan-tag">${c.plan}</span></td>
+          <td><span class="badge ${st==='delivered'?'badge-delivered':st==='sent'?'badge-sent':'badge-pending'}">${st.toUpperCase()}</span></td>
+          <td><div class="action-btns">
+            <button class="btn-sm btn-yellow" onclick="setDelStatus('${c.id}','pending','${esc(c.name)}')">Pending</button>
+            <button class="btn-sm btn-teal"   onclick="setDelStatus('${c.id}','sent','${esc(c.name)}')">Sent</button>
+            <button class="btn-sm btn-dgreen" onclick="setDelStatus('${c.id}','delivered','${esc(c.name)}')">Delivered</button>
+          </div></td>
+        </tr>`;
+      });
+    });
+    document.getElementById('del-tbody').innerHTML=h||`<tr><td colspan="6" class="empty-td">No customers</td></tr>`;
+  }
+}
+function toggleDelGroup(){
+  delGroupByAddr=!delGroupByAddr;
+  document.getElementById('del-group-btn').classList.toggle('active',delGroupByAddr);
+  renderDelivery();
+}
+function renderHeatmap(){
+  const today=getTodayDate();
+  const active=customers.filter(c=>c.status==='Active');
+  const days=[]; for(let i=29;i>=0;i--){ const d=new Date(today); d.setDate(today.getDate()-i); days.push(d); }
+  const wds=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  let h=wds.map(w=>`<div class="cal-weekday">${w}</div>`).join('');
+  days.forEach(d=>{
+    const dk=fmtKey(d);
+    const cnt=active.filter(c=>deliveryRecords[c.id+'_'+dk]==='delivered').length;
+    const lvl=cnt===0?0:cnt<=2?1:cnt<=4?2:cnt<=6?3:4;
+    const isTd=dk===fmtKey(today);
+    h+=`<div class="cal-day l${lvl}${isTd?' today':''}" title="${dk}: ${cnt} delivered">${d.getDate()}</div>`;
+  });
+  document.getElementById('cal-heatmap').innerHTML=h;
+}
+
+// ════════════════════════════════════════════
+//  BILLING
+// ════════════════════════════════════════════
+function renderBillStats(){
+  const active=customers.filter(c=>c.status==='Active');
+  const collected=active.filter(c=>getBillStatus(c.id)==='paid').reduce((s,c)=>s+c.monthlyRate,0);
+  const pending  =active.filter(c=>getBillStatus(c.id)==='pending').reduce((s,c)=>s+c.monthlyRate,0);
+  const total=collected+pending;
+  const mn=new Date(); const m=['January','February','March','April','May','June','July','August','September','October','November','December'][mn.getMonth()];
+  document.getElementById('bill-month-pill').textContent=m+' '+mn.getFullYear();
+  document.getElementById('bill-stats').innerHTML=`
+    <div class="stat-card"><div class="s-label">Total Billing</div><div class="s-value">${fmt(total)}</div><div class="s-sub">Expected</div></div>
+    <div class="stat-card"><div class="s-label">Collected</div><div class="s-value green">${fmt(collected)}</div><div class="s-sub">Received</div></div>
+    <div class="stat-card"><div class="s-label">Pending</div><div class="s-value red">${fmt(pending)}</div><div class="s-sub">To collect</div></div>
+    <div class="stat-card"><div class="s-label">Customers</div><div class="s-value">${active.length}</div><div class="s-sub">Active</div></div>`;
+}
+function renderBilling(){
+  const search=(document.getElementById('bill-search').value||'').toLowerCase();
+  const filt=document.getElementById('bill-status-filter').value;
+  let list=customers.filter(c=>c.status==='Active').filter(c=>{
+    const m=c.name.toLowerCase().includes(search)||c.address.toLowerCase().includes(search)||c.id.includes(search);
+    const bf=filt==='all'||(filt==='paid'&&getBillStatus(c.id)==='paid')||(filt==='pending'&&getBillStatus(c.id)==='pending');
+    return m&&bf;
+  });
+  document.getElementById('bill-tbody').innerHTML=list.map(c=>{
+    const paid=getBillStatus(c.id)==='paid';
+    return `<tr>
+      <td><span class="id-badge">${esc(c.id)}</span></td>
+      <td><strong>${esc(c.name)}</strong><br><span style="font-size:0.65rem;color:#5b6e8c">${esc(c.address)}</span></td>
+      <td><span class="plan-tag">${c.plan}</span></td>
+      <td style="font-weight:700;color:#1e4a6e">${fmt(c.monthlyRate)}</td>
+      <td><span class="badge ${paid?'badge-paid':'badge-pending'}">${paid?'Paid':'Pending'}</span></td>
+      <td><button class="btn-sm ${paid?'btn-gray':'btn-green'}" onclick="setBillStatus('${c.id}','${paid?'pending':'paid'}','${esc(c.name)}')">${paid?'Mark Pending':'Mark Paid'}</button></td>
+    </tr>`;
+  }).join('')||`<tr><td colspan="6" class="empty-td">No customers found</td></tr>`;
+}
+
+// ════════════════════════════════════════════
+//  EXPENSES
+// ════════════════════════════════════════════
+function changeExpMonth(){ expCurMonth=document.getElementById('exp-month-select').value; renderAllExp(); }
+
+function renderAllExp(){
+  renderExpStats(); renderExpOverview(); renderExpCategories(); renderExpTx(); renderExpBudget(); renderExpSavings();
+}
+
+function renderExpStats(){
+  const inc=totalType('income'), exp=totalType('expense'), sav=inc-exp;
+  document.getElementById('exp-stats').innerHTML=`
+    <div class="stat-card"><div class="s-label">Total Income</div><div class="s-value green">${fmt(inc)}</div></div>
+    <div class="stat-card"><div class="s-label">Total Expense</div><div class="s-value red">${fmt(exp)}</div></div>
+    <div class="stat-card"><div class="s-label">Net Savings</div><div class="s-value" style="color:${sav>=0?'#2c7a5e':'#991b1b'}">${fmt(sav)}</div></div>
+    <div class="stat-card"><div class="s-label">Transactions</div><div class="s-value">${monthExp().length}</div></div>`;
+}
+
+function renderExpOverview(){
+  renderExpDonut();
+  const recent=[...monthExp()].sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id).slice(0,6);
+  document.getElementById('exp-recent-tx').innerHTML=buildExpTxRows(recent,false);
+  const daily={};
+  monthExp().filter(e=>e.type==='expense').forEach(e=>{ const d=parseInt(e.date.split('-')[2]); daily[d]=(daily[d]||0)+e.amount; });
+  const maxV=Math.max(...Object.values(daily),1);
+  const days=daysInMonth(); let bars='',labels='';
+  for(let d=1;d<=days;d++){
+    const v=daily[d]||0, h=Math.max(Math.round((v/maxV)*100),v>0?5:2);
+    const isTd=d===new Date().getDate()&&expCurMonth===todayStr.slice(0,7);
+    bars+=`<div title="${d}: ${fmt(v)}" style="flex:1;min-width:7px;height:${h}%;background:${isTd?'#1e4a6e':v>0?'#2c7a5e':'#eef2f8'};border-radius:3px 3px 0 0;cursor:default"></div>`;
+    labels+=`<div style="flex:1;min-width:7px;font-size:9px;color:#8ba0bc;text-align:center">${d%5===0||d===1?d:''}</div>`;
+  }
+  document.getElementById('exp-daily-chart').innerHTML=bars;
+  document.getElementById('exp-daily-labels').innerHTML=labels;
+}
+function renderExpDonut(){
+  const data=EXP_CATS.filter(c=>c.exp).map(c=>({c,amt:catTotal(c.id)})).filter(d=>d.amt>0).sort((a,b)=>b.amt-a.amt);
+  const total=data.reduce((s,d)=>s+d.amt,0);
+  if(!total){
+    document.getElementById('exp-donut-svg').innerHTML=`<circle cx="60" cy="60" r="42" fill="none" stroke="#eef2f8" stroke-width="18"/>`;
+    document.getElementById('exp-donut-legend').innerHTML='<div class="empty" style="padding:12px">No expenses yet</div>';return;
+  }
+  const r=42,cx=60,cy=60,circ=2*Math.PI*r; let svgH='',legH='',off=0;
+  data.slice(0,7).forEach(d=>{
+    const pct=d.amt/total,dash=pct*circ,rot=(off/total)*360-90;
+    svgH+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${d.c.color}" stroke-width="18" stroke-dasharray="${dash} ${circ-dash}" stroke-dashoffset="${-off/total*circ}" transform="rotate(${rot} ${cx} ${cy})"/>`;
+    off+=d.amt;
+    legH+=`<div class="leg-row"><div class="leg-dot" style="background:${d.c.color}"></div><span class="leg-name">${d.c.name}</span><span class="leg-pct">${Math.round(pct*100)}%</span><span class="leg-amt">${fmt(d.amt)}</span></div>`;
+  });
+  svgH+=`<text x="${cx}" y="${cy+4}" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="#1e4a6e">${fmt(total)}</text>`;
+  document.getElementById('exp-donut-svg').innerHTML=svgH;
+  document.getElementById('exp-donut-legend').innerHTML=legH;
+}
+
+function renderExpCategories(){
+  document.getElementById('exp-cat-grid').innerHTML=EXP_CATS.filter(c=>c.exp).map(cat=>{
+    const amt=catTotal(cat.id), count=monthExp().filter(e=>e.cat===cat.id).length;
+    const bgt=expBudgets[cat.id]||0, pct=bgt>0?Math.min(Math.round((amt/bgt)*100),100):0;
+    const over=bgt>0&&amt>bgt, barCol=over?'#991b1b':pct>80?'#b45309':cat.color;
+    return `<div class="cat-card" onclick="filterExpCat('${cat.id}')">
+      <div class="cat-name">${cat.name}</div>
+      <div class="cat-amt" style="color:${cat.color}">${fmt(amt)}</div>
+      <div class="cat-count">${count} transaction${count!==1?'s':''}</div>
+      ${bgt>0?`<div class="prog-meta"><span>${pct}% used</span><span>${fmt(bgt)}</span></div><div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${barCol}"></div></div>${over?`<div style="font-size:0.62rem;color:#991b1b;margin-top:3px;font-weight:700">Over by ${fmt(amt-bgt)}</div>`:''}`:
+      `<div style="font-size:0.65rem;color:#c5d2e0;margin-top:5px">No budget set</div>`}
+    </div>`;
+  }).join('');
+  document.getElementById('exp-income-cats').innerHTML=EXP_CATS.filter(c=>!c.exp).map(cat=>{
+    const amt=monthExp().filter(e=>e.cat===cat.id&&e.type==='income').reduce((s,e)=>s+e.amount,0);
+    return `<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #f0f4fa;font-size:0.82rem"><span style="font-weight:600;color:${cat.color}">${cat.name}</span><span style="font-weight:700;color:#2c7a5e">${fmt(amt)}</span></div>`;
+  }).join('');
+}
+
+function filterExpCat(id){
+  showExpTab('transactions',document.getElementById('exp-tab-transactions'));
+  document.getElementById('exp-tx-cat').value=id;
+  renderExpTx();
+}
+
+function renderExpTx(){
+  const sel=document.getElementById('exp-tx-cat');
+  if(sel.options.length<=1) EXP_CATS.forEach(c=>{ const o=document.createElement('option'); o.value=c.id; o.textContent=c.name; sel.appendChild(o); });
+  const search=(document.getElementById('exp-tx-search').value||'').toLowerCase();
+  const catF=document.getElementById('exp-tx-cat').value;
+  const typeF=document.getElementById('exp-tx-type').value;
+  const list=[...monthExp()].sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id)
+    .filter(e=>(e.desc.toLowerCase().includes(search)||(ECM[e.cat]?.name||'').toLowerCase().includes(search))&&(catF==='all'||e.cat===catF)&&(typeF==='all'||e.type===typeF));
+  document.getElementById('exp-tx-tbody').innerHTML=list.length?buildExpTxRows(list,true):`<tr><td colspan="7" class="empty-td">No transactions found</td></tr>`;
+}
+
+function buildExpTxRows(list,actions){
+  if(!list.length) return '<div class="empty">No entries</div>';
+  if(!actions){
+    return list.map(e=>{
+      const cat=ECM[e.cat]||{color:'#5b6e8c',name:'Other'};
+      return `<div class="tx-row"><div class="tx-dot" style="background:${cat.color}"></div><div class="tx-info"><div class="tx-desc">${esc(e.desc)}</div><div class="tx-meta" style="color:${cat.color}">${cat.name} · ${fmtDate(e.date)}</div></div><div class="tx-amt ${e.type}">${e.type==='income'?'+':'−'}${fmt(e.amount)}</div></div>`;
+    }).join('');
+  }
+  return list.map(e=>{
+    const cat=ECM[e.cat]||{color:'#5b6e8c',name:'Other'};
+    return `<tr>
+      <td style="font-size:0.75rem;color:#5b6e8c;white-space:nowrap">${fmtDate(e.date)}</td>
+      <td><strong style="font-size:0.8rem">${esc(e.desc)}</strong></td>
+      <td><span style="font-size:0.72rem;font-weight:700;color:${cat.color}">${cat.name}</span></td>
+      <td style="font-size:0.75rem;color:#5b6e8c;text-transform:capitalize">${e.mode}</td>
+      <td><span class="badge ${e.type==='income'?'badge-income':'badge-expense'}">${e.type==='income'?'Income':'Expense'}</span></td>
+      <td style="font-weight:700;color:${e.type==='income'?'#2c7a5e':'#b45309'};white-space:nowrap">${e.type==='income'?'+':'−'}${fmt(e.amount)}</td>
+      <td><div class="action-btns">
+        <button class="btn-sm btn-edit" onclick="editExpEntry(${e.id})">Edit</button>
+        <button class="btn-sm btn-del"  onclick="delExpEntry(${e.id})">Delete</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderExpBudget(){
+  let alertsH='';
+  EXP_CATS.filter(c=>c.exp&&expBudgets[c.id]).forEach(cat=>{
+    const spent=catTotal(cat.id),lim=expBudgets[cat.id],pct=(spent/lim)*100;
+    if(pct>=100) alertsH+=`<div class="alert-box danger">${cat.name} is over budget — spent ${fmt(spent)} of ${fmt(lim)}.</div>`;
+    else if(pct>=80) alertsH+=`<div class="alert-box">${cat.name} at ${Math.round(pct)}% of budget (${fmt(spent)} / ${fmt(lim)}).</div>`;
+  });
+  document.getElementById('exp-budget-alerts').innerHTML=alertsH;
+  document.getElementById('exp-budget-list').innerHTML=EXP_CATS.filter(c=>c.exp).map(cat=>{
+    const spent=catTotal(cat.id),lim=expBudgets[cat.id]||0,pct=lim>0?Math.min(Math.round((spent/lim)*100),100):0;
+    const over=lim>0&&spent>lim,rem=lim-spent,barCol=over?'#991b1b':pct>80?'#b45309':cat.color;
+    return `<div class="budget-item">
+      <div class="budget-head">
+        <div><div class="budget-name" style="color:${cat.color}">${cat.name}</div><div class="budget-spent">Spent: ${fmt(spent)}</div></div>
+        <div><div class="budget-limit">${lim>0?fmt(lim):'No limit'}</div><div class="budget-left" style="color:${over?'#991b1b':rem>=0?'#2c7a5e':'#991b1b'}">${lim>0?(over?'Over '+fmt(-rem):'Left '+fmt(rem)):'—'}</div></div>
+      </div>
+      ${lim>0?`<div class="prog-meta"><span>${pct}% used</span><span>${fmt(spent)} / ${fmt(lim)}</span></div><div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${barCol}"></div></div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function renderExpSavings(){
+  const inc=totalType('income'),exp=totalType('expense'),sav=inc-exp;
+  const rate=inc>0?Math.round((sav/inc)*100):0;
+  document.getElementById('exp-savings-hero').innerHTML=`
+    <div class="big-num" style="color:${sav>=0?'#1e4a6e':'#991b1b'}">${fmt(Math.abs(sav))}</div>
+    <div class="big-lbl">${sav>=0?'Net savings this month':'Expenses exceed income'}</div>
+    <div class="big-note">${sav>=0?`Saved ${rate}% of income`:`Over by ${fmt(-sav)}`}</div>`;
+  const maxV=Math.max(inc,exp,1);
+  document.getElementById('exp-inc-cmp').innerHTML=`
+    <div class="cmp-item"><div class="cmp-label"><span style="color:#2c7a5e">Income</span><span style="color:#2c7a5e">${fmt(inc)}</span></div><div class="cmp-bar"><div class="cmp-fill" style="width:${(inc/maxV)*100}%;background:#2c7a5e"></div></div></div>
+    <div class="cmp-item"><div class="cmp-label"><span style="color:#b45309">Expense</span><span style="color:#b45309">${fmt(exp)}</span></div><div class="cmp-bar"><div class="cmp-fill" style="width:${(exp/maxV)*100}%;background:#b45309"></div></div></div>
+    <div style="margin-top:14px;padding:10px 14px;background:${sav>=0?'#e8f3ef':'#fef3c7'};border-radius:12px;display:flex;justify-content:space-between">
+      <span style="font-size:0.78rem;font-weight:600;color:${sav>=0?'#2c7a5e':'#b45309'}">${sav>=0?'Saved':'Loss'}</span>
+      <span style="font-weight:700;color:${sav>=0?'#1e4a6e':'#991b1b'}">${fmt(Math.abs(sav))}</span>
+    </div>`;
+  let rows='';
+  EXP_CATS.filter(c=>c.exp).forEach(cat=>{
+    const spent=catTotal(cat.id);
+    if(!spent&&!expBudgets[cat.id]) return;
+    const over=expBudgets[cat.id]>0&&spent>expBudgets[cat.id];
+    rows+=`<tr><td style="font-size:0.8rem;color:${cat.color};font-weight:600">${cat.name}</td><td style="font-weight:700;color:${over?'#991b1b':'#1a2c3e'}">${fmt(spent)}</td><td style="color:#8ba0bc">${expBudgets[cat.id]?fmt(expBudgets[cat.id]):'—'}</td></tr>`;
+  });
+  document.getElementById('exp-sum-tbody').innerHTML=rows;
+  document.getElementById('exp-sum-total').textContent=fmt(exp);
+}
+
+// ── Expense Modal ───────────────────────────
+function openExpModal(){
+  expEditId=null;
+  document.getElementById('exp-modal-title').textContent='Add Entry';
+  document.getElementById('em-amount').value='';
+  document.getElementById('em-date').value=todayStr;
+  document.getElementById('em-desc').value='';
+  document.getElementById('em-note').value='';
+  document.getElementById('em-mode').value='cash';
+  setExpType('expense');
+  openModal('modal-expense');
+}
+function editExpEntry(id){
+  const e=expEntries.find(x=>x.id===id); if(!e) return;
+  expEditId=id;
+  document.getElementById('exp-modal-title').textContent='Edit Entry';
+  setExpType(e.type);
+  document.getElementById('em-amount').value=e.amount;
+  document.getElementById('em-date').value=e.date;
+  document.getElementById('em-desc').value=e.desc;
+  document.getElementById('em-mode').value=e.mode||'cash';
+  document.getElementById('em-note').value=e.note||'';
+  fillExpCats(e.type);
+  document.getElementById('em-cat').value=e.cat;
+  openModal('modal-expense');
+}
+function delExpEntry(id){
+  if(!confirm('Delete this entry?')) return;
+  expEntries=expEntries.filter(e=>e.id!==id);
+  saveExpenses(); renderAllExp(); showToast('Entry deleted');
+}
+function setExpType(t){
+  expEntryType=t;
+  document.getElementById('exp-type-exp').className='type-btn'+(t==='expense'?' active-exp':'');
+  document.getElementById('exp-type-inc').className='type-btn'+(t==='income'?' active-inc':'');
+  fillExpCats(t);
+}
+function fillExpCats(t){
+  document.getElementById('em-cat').innerHTML=EXP_CATS.filter(c=>t==='expense'?c.exp:!c.exp).map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+}
+function saveExpEntry(){
+  const amt=parseFloat(document.getElementById('em-amount').value);
+  const desc=document.getElementById('em-desc').value.trim();
+  const date=document.getElementById('em-date').value;
+  if(!amt||amt<=0){ showToast('Enter a valid amount'); return; }
+  if(!desc){ showToast('Enter a description'); return; }
+  if(!date){ showToast('Select a date'); return; }
+  const entry={id:expEditId||expNid++,type:expEntryType,amount:amt,date,desc,cat:document.getElementById('em-cat').value,mode:document.getElementById('em-mode').value,note:document.getElementById('em-note').value.trim()};
+  if(expEditId){ const i=expEntries.findIndex(e=>e.id===expEditId); if(i>=0) expEntries[i]=entry; }
+  else expEntries.push(entry);
+  saveExpenses(); closeModal('modal-expense'); renderAllExp(); renderOverview();
+  showToast(expEditId?'Entry updated':'Entry added');
+}
+
+// ── Budget Modal ────────────────────────────
+function openBudgetModal(){
+  document.getElementById('budget-input-list').innerHTML=EXP_CATS.filter(c=>c.exp).map(cat=>`
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:11px">
+      <label style="font-size:0.8rem;font-weight:600;color:#2c4c6c;flex:1">${cat.name}</label>
+      <input type="number" id="bgt-${cat.id}" value="${expBudgets[cat.id]||''}" placeholder="No limit" style="width:120px;padding:8px 12px;border-radius:40px;border:1px solid #e2e8f0;font-size:0.82rem;font-family:inherit;text-align:right;outline:none;background:#fafcff">
+    </div>`).join('');
+  openModal('modal-budget');
+}
+function saveBudgets(){
+  EXP_CATS.filter(c=>c.exp).forEach(cat=>{
+    const v=parseInt(document.getElementById('bgt-'+cat.id).value)||0;
+    if(v>0) expBudgets[cat.id]=v; else delete expBudgets[cat.id];
+  });
+  saveExpenses(); closeModal('modal-budget'); renderAllExp(); showToast('Budgets saved');
+}
+
+// ── Exp Sub-tabs ────────────────────────────
+function showExpTab(name, btn){
+  document.querySelectorAll('.exp-section').forEach(s=>s.style.display='none');
+  document.querySelectorAll('.toggle-btn[id^="exp-tab"]').forEach(b=>b.classList.remove('active'));
+  document.getElementById('exp-'+name).style.display='block';
+  if(btn) btn.classList.add('active');
+}
+
+// ════════════════════════════════════════════
+//  MODAL UTILS
+// ════════════════════════════════════════════
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) m.classList.remove('open'); }));
+
+// ════════════════════════════════════════════
+//  TOAST
+// ════════════════════════════════════════════
 function showToast(msg){
-  document.getElementById('t-msg').textContent=msg;
-  const t=document.getElementById('toast');
-  t.classList.add('show');
-  clearTimeout(tTimer);
-  tTimer=setTimeout(()=>t.classList.remove('show'),2600);
+  const t=document.createElement('div'); t.className='toast'; t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.style.opacity='1',10);
+  setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(),300); },2200);
 }
 
-// SCROLL REVEAL
-const sobs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
-},{threshold:0.08});
-document.querySelectorAll('.rv,.rl,.rr').forEach(el=>sobs.observe(el));
+// ════════════════════════════════════════════
+//  SYNC / AUTO-REFRESH
+// ════════════════════════════════════════════
+function syncAll(){
+  const s=localStorage.getItem('tiffin_pro_customers');
+  if(s){ try{ const nc=JSON.parse(s); if(JSON.stringify(nc)!==JSON.stringify(customers)){ customers=nc; loadDelivery(); loadBilling(); renderPage(document.querySelector('.nav-btn.active')?.textContent?.toLowerCase().trim()||'overview'); } }catch(e){} }
+}
 
-// Init juice summary
-updateJuiceSum();
+// ════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════
+function init(){
+  loadCustomers();
+  loadDelivery();
+  loadBilling();
+  loadExpenses();
+  fillExpCats('expense');
+  renderPage('overview');
+  setInterval(syncAll, 4000);
+}
+
+init();
 </script>
 </body>
 </html>
